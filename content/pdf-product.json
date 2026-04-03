@@ -1,0 +1,15 @@
+{
+  "title": "Le Guide CNV pour Couples",
+  "subtitle": "12 Scripts pour Transformer vos Disputes en Dialogues",
+  "price": 22,
+  "currency": "EUR",
+  "description": "28 pages de scripts concrets, de méthodes CNV appliquées et d'exercices à faire chez soi. Pour les couples qui veulent se parler vraiment.",
+  "features": [
+    "12 scripts de conversations difficiles prêts à utiliser",
+    "Méthode CNV expliquée simplement (sans jargon)",
+    "Protocole 'conversation réparatrice' après une dispute",
+    "3 rituels de communication à ancrer cette semaine",
+    "Checklist 7 jours + journal de suivi"
+  ],
+  "stripe_price_id": ""
+}

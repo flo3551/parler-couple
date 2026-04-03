@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import LeadForm from "../../components/LeadForm.astro";
+import TrustSignals from "../../components/TrustSignals.astro";
+import { site } from "../../../site.config.ts";
+
+export async function getStaticPaths() {
+  if (!site.monetization.leadGen) return [];
+
+  // Glob all lead-gen JSON files from content/lead-gen/
+  const files = import.meta.glob("/content/lead-gen/*.json", { eager: true });
+  return Object.entries(files).map(([path, data]) => {
+    const slug = path.replace("/content/lead-gen/", "").replace(".json", "");
+    return { params: { slug }, props: { data } };
+  });
+}
+
+interface LeadData {
+  service: string;
+  zone: string;
+  headline: string;
+  subtitle: string;
+  body: string;
+  trust_signals: Array<{ icon: string; text: string }>;
+  cta: string;
+  faq: Array<{ q: string; a: string }>;
+}
+
+const { data } = Astro.props as { data: LeadData };
+const l = site.lang;
+
+const webhookUrl =
+  import.meta.env.N8N_WEBHOOK_URL ??
+  (site as any).n8nWebhookUrl ??
+  "/api/subscribe";
+
+const breadcrumbLabel: Record<string, string> = {
+  fr: "Demande de devis",
+  en: "Get a quote",
+  de: "Angebot anfragen",
+  es: "Solicitar presupuesto",
+};
+
+const faqTitle: Record<string, string> = {
+  fr: "Questions fréquentes",
+  en: "Frequently asked questions",
+  de: "Häufige Fragen",
+  es: "Preguntas frecuentes",
+};
+
+const faqSchema = data.faq?.length > 0
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: data.faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    }
+  : null;
+---
+
+<BaseLayout
+  title={data.headline}
+  description={data.subtitle}
+>
+  {faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+  )}
+
+  <div class="max-w-4xl mx-auto px-4 py-10">
+    <Breadcrumb
+      crumbs={[{ label: breadcrumbLabel[l], href: Astro.url.pathname }]}
+    />
+
+    <div class="mt-6 grid lg:grid-cols-5 gap-10">
+      <div class="lg:col-span-3 space-y-8">
+        <header>
+          <p class="text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)] mb-2">
+            {data.service} — {data.zone}
+          </p>
+          <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-3">
+            {data.headline}
+          </h1>
+          <p class="text-lg text-gray-600">{data.subtitle}</p>
+        </header>
+
+        <div class="prose prose-gray max-w-none text-gray-700" set:html={data.body} />
+
+        {data.trust_signals?.length > 0 && (
+          <section>
+            <TrustSignals signals={data.trust_signals} layout="grid" />
+          </section>
+        )}
+
+        {data.faq?.length > 0 && (
+          <section>
+            <h2 class="text-xl font-bold text-gray-900 mb-5">{faqTitle[l]}</h2>
+            <dl class="space-y-4">
+              {data.faq.map((item) => (
+                <div class="rounded-xl border border-gray-100 p-5">
+                  <dt class="font-semibold text-gray-800 mb-2">{item.q}</dt>
+                  <dd class="text-sm text-gray-600 leading-relaxed">{item.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
+      </div>
+
+      <aside class="lg:col-span-2">
+        <div class="sticky top-24 rounded-2xl border border-gray-100 bg-white shadow-md p-6">
+          <p class="text-base font-semibold text-gray-900 mb-4">{data.cta}</p>
+          <LeadForm webhookUrl={webhookUrl} />
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

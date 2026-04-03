@@ -1,0 +1,89 @@
+---
+import { site } from "../../site.config.ts";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+  publishedAt?: string;
+  modifiedAt?: string;
+}
+
+const {
+  title,
+  description = site.description,
+  canonical,
+  ogImage,
+  ogType = "website",
+  noindex = false,
+  publishedAt,
+  modifiedAt,
+} = Astro.props;
+
+const siteBase = site.domain || "https://parler-couple.vercel.app";
+const pageTitle = title ? `${title} | ${site.name}` : site.name;
+const canonicalURL = canonical
+  ? new URL(canonical, siteBase).href
+  : new URL(Astro.url.pathname, siteBase).href;
+
+const ogImageURL = ogImage
+  ? new URL(ogImage, siteBase).href
+  : new URL("/og-default.png", siteBase).href;
+
+const schemaWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  url: siteBase,
+  description: site.description,
+  inLanguage: site.lang,
+};
+
+const schemaWebPage = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description,
+  url: canonicalURL,
+  isPartOf: { "@id": siteBase },
+  inLanguage: site.lang,
+  ...(publishedAt && { datePublished: publishedAt }),
+  ...(modifiedAt && { dateModified: modifiedAt }),
+};
+---
+
+<!-- Primary Meta -->
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+{!noindex && <meta name="robots" content="index, follow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={site.lang} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+{site.twitterHandle && (
+  <meta name="twitter:site" content={site.twitterHandle} />
+)}
+
+<!-- Schema.org WebSite -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaWebSite)} />
+
+<!-- Schema.org WebPage -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaWebPage)} />

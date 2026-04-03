@@ -1,0 +1,131 @@
+---
+import { site } from "../../site.config.ts";
+import SEO from "../components/SEO.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+  publishedAt?: string;
+  modifiedAt?: string;
+}
+
+const props = Astro.props;
+
+// Build the CSS custom properties string for injection
+const cssVars = `:root{--color-primary:${site.colors.primary};--color-accent:${site.colors.accent};}`;
+---
+
+<!doctype html>
+<html lang={site.lang} dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- SEO meta (title, description, OG, schema.org) -->
+    <SEO {...props} />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- CSS custom properties injected from site.config.ts -->
+    <style set:html={cssVars}></style>
+
+    <!-- Slot for additional head content -->
+    <slot name="head" />
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-white text-gray-900 antialiased">
+    <Header />
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Skip to content link for accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-gray-900 focus:rounded focus:shadow-lg"
+    >
+      {site.lang === "fr" ? "Aller au contenu" : site.lang === "de" ? "Zum Inhalt" : site.lang === "es" ? "Ir al contenido" : "Skip to content"}
+    </a>
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+</style>

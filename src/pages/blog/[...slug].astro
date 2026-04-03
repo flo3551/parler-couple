@@ -1,0 +1,212 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { site } from "../../../site.config.ts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const related = allPosts
+  .filter(
+    (p) =>
+      p.slug !== post.slug &&
+      (p.data.kw_primary === post.data.kw_primary ||
+        p.data.tags?.some((t) => post.data.tags?.includes(t)))
+  )
+  .slice(0, 3);
+
+const l = site.lang;
+
+const ctaLabels: Record<string, Record<string, string>> = {
+  pdfCta: {
+    fr: "Télécharger le guide PDF",
+    en: "Download the PDF guide",
+    de: "PDF-Leitfaden herunterladen",
+    es: "Descargar la guía PDF",
+  },
+  leadCta: {
+    fr: "Obtenir un devis gratuit",
+    en: "Get a free quote",
+    de: "Kostenloses Angebot erhalten",
+    es: "Obtener presupuesto gratuito",
+  },
+  affiliateCta: {
+    fr: "Voir notre sélection",
+    en: "See our selection",
+    de: "Unsere Auswahl ansehen",
+    es: "Ver nuestra selección",
+  },
+  relatedTitle: {
+    fr: "Articles liés",
+    en: "Related articles",
+    de: "Verwandte Artikel",
+    es: "Artículos relacionados",
+  },
+  internalLinksTitle: {
+    fr: "Pour aller plus loin",
+    en: "Learn more",
+    de: "Weiterführende Links",
+    es: "Para saber más",
+  },
+};
+
+const pubDateFormatted = new Intl.DateTimeFormat(l, {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(post.data.pubDate);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.metaDescription,
+  datePublished: post.data.pubDate.toISOString(),
+  url: new URL(`/blog/${post.slug}`, site.domain || "https://parler-couple.vercel.app").href,
+  inLanguage: site.lang,
+  author: {
+    "@type": "Organization",
+    name: site.name,
+    url: site.domain || "https://parler-couple.vercel.app",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+    url: site.domain || "https://parler-couple.vercel.app",
+  },
+  keywords: [post.data.kw_primary, ...(post.data.kw_secondary ?? [])].join(", "),
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.metaDescription}
+  canonical={`/blog/${post.slug}`}
+  ogType="article"
+  publishedAt={post.data.pubDate.toISOString()}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} slot="head" />
+
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <Breadcrumb
+      crumbs={[
+        { label: "Blog", href: "/blog" },
+        { label: post.data.title, href: `/blog/${post.slug}` },
+      ]}
+    />
+
+    <article class="mt-4">
+      <header class="mb-8">
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-4">
+            {post.data.tags.map((tag) => (
+              <a
+                href={`/blog?tag=${encodeURIComponent(tag)}`}
+                class="text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        )}
+
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-4">
+          {post.data.title}
+        </h1>
+
+        <p class="text-lg text-gray-600 mb-4">{post.data.metaDescription}</p>
+
+        <time
+          datetime={post.data.pubDate.toISOString()}
+          class="text-sm text-gray-400"
+        >
+          {pubDateFormatted}
+        </time>
+      </header>
+
+      <div class="prose prose-gray max-w-none prose-a:text-[var(--color-primary)]">
+        <Content />
+      </div>
+
+      {post.data.internal_links && post.data.internal_links.length > 0 && (
+        <aside class="mt-10 p-5 rounded-xl bg-gray-50 border border-gray-100">
+          <h2 class="text-base font-semibold text-gray-800 mb-3">
+            {ctaLabels.internalLinksTitle[l]}
+          </h2>
+          <ul class="space-y-1.5">
+            {post.data.internal_links.map((link) => (
+              <li>
+                <a
+                  href={link.url}
+                  class="text-sm text-[var(--color-primary)] hover:underline"
+                >
+                  → {link.anchor}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+
+      {(site.monetization.pdf || site.monetization.leadGen || site.monetization.affiliation) && (
+        <aside class="mt-8 p-6 rounded-xl bg-[var(--color-primary)] text-white text-center">
+          {site.monetization.pdf && (
+            <a
+              href="/pdf"
+              class="inline-block px-6 py-3 bg-white text-[var(--color-primary)] font-semibold rounded-lg hover:opacity-90 transition-opacity"
+            >
+              {ctaLabels.pdfCta[l]}
+            </a>
+          )}
+          {!site.monetization.pdf && site.monetization.leadGen && (
+            <a
+              href="/contact"
+              class="inline-block px-6 py-3 bg-white text-[var(--color-primary)] font-semibold rounded-lg hover:opacity-90 transition-opacity"
+            >
+              {ctaLabels.leadCta[l]}
+            </a>
+          )}
+          {!site.monetization.pdf && !site.monetization.leadGen && site.monetization.affiliation && (
+            <a
+              href="/shop"
+              class="inline-block px-6 py-3 bg-white text-[var(--color-primary)] font-semibold rounded-lg hover:opacity-90 transition-opacity"
+            >
+              {ctaLabels.affiliateCta[l]}
+            </a>
+          )}
+        </aside>
+      )}
+    </article>
+
+    {related.length > 0 && (
+      <section class="mt-14">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          {ctaLabels.relatedTitle[l]}
+        </h2>
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+          {related.map((p) => (
+            <li>
+              <ArticleCard
+                title={p.data.title}
+                slug={p.slug}
+                pubDate={p.data.pubDate}
+                metaDescription={p.data.metaDescription}
+                kw_primary={p.data.kw_primary}
+                tags={p.data.tags}
+                image={p.data.image}
+              />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</BaseLayout>

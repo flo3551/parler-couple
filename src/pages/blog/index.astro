@@ -1,0 +1,146 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { site } from "../../../site.config.ts";
+
+const PER_PAGE = 10;
+
+const url = Astro.url;
+const pageParam = url.searchParams.get("page");
+const tagParam = url.searchParams.get("tag");
+const currentPage = pageParam ? Math.max(1, parseInt(pageParam, 10)) : 1;
+
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const sorted = allPosts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+
+const allTags = [...new Set(sorted.flatMap((p) => p.data.tags ?? []))].sort();
+
+const filtered = tagParam
+  ? sorted.filter((p) => p.data.tags?.includes(tagParam))
+  : sorted;
+
+const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+const safePage = Math.min(currentPage, totalPages);
+const paginated = filtered.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE);
+
+const blogLabels: Record<string, Record<string, string>> = {
+  title: { fr: "Blog", en: "Blog", de: "Blog", es: "Blog" },
+  desc: {
+    fr: `Articles sur ${site.niche} — conseils, guides et actualités`,
+    en: `Articles about ${site.niche} — tips, guides and news`,
+    de: `Artikel über ${site.niche} — Tipps, Guides und Neuigkeiten`,
+    es: `Artículos sobre ${site.niche} — consejos, guías y noticias`,
+  },
+  filter: { fr: "Filtrer par tag", en: "Filter by tag", de: "Nach Tag filtern", es: "Filtrar por etiqueta" },
+  all: { fr: "Tous", en: "All", de: "Alle", es: "Todos" },
+  prev: { fr: "Précédent", en: "Previous", de: "Vorherige", es: "Anterior" },
+  next: { fr: "Suivant", en: "Next", de: "Nächste", es: "Siguiente" },
+  page: { fr: "Page", en: "Page", de: "Seite", es: "Página" },
+  empty: { fr: "Aucun article trouvé.", en: "No articles found.", de: "Keine Artikel gefunden.", es: "No se encontraron artículos." },
+};
+
+const l = site.lang;
+const pageTitle = tagParam
+  ? `${tagParam} — ${blogLabels.title[l]}`
+  : blogLabels.title[l];
+const pageDesc = blogLabels.desc[l];
+
+function buildPageUrl(p: number, tag?: string | null) {
+  const params = new URLSearchParams();
+  if (p > 1) params.set("page", String(p));
+  if (tag) params.set("tag", tag);
+  const qs = params.toString();
+  return `/blog${qs ? `?${qs}` : ""}`;
+}
+---
+
+<BaseLayout title={pageTitle} description={pageDesc}>
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">{pageTitle}</h1>
+      <p class="text-gray-600">{pageDesc}</p>
+    </header>
+
+    {allTags.length > 0 && (
+      <nav aria-label={blogLabels.filter[l]} class="mb-8 flex flex-wrap gap-2">
+        <a
+          href="/blog"
+          class:list={[
+            "px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
+            !tagParam
+              ? "bg-[var(--color-primary)] text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200",
+          ]}
+        >
+          {blogLabels.all[l]}
+        </a>
+        {allTags.map((tag) => (
+          <a
+            href={`/blog?tag=${encodeURIComponent(tag)}`}
+            class:list={[
+              "px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
+              tagParam === tag
+                ? "bg-[var(--color-primary)] text-white"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200",
+            ]}
+          >
+            {tag}
+          </a>
+        ))}
+      </nav>
+    )}
+
+    {paginated.length === 0 ? (
+      <p class="text-gray-500 py-12 text-center">{blogLabels.empty[l]}</p>
+    ) : (
+      <ul
+        class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        role="list"
+      >
+        {paginated.map((post) => (
+          <li>
+            <ArticleCard
+              title={post.data.title}
+              slug={post.slug}
+              pubDate={post.data.pubDate}
+              metaDescription={post.data.metaDescription}
+              kw_primary={post.data.kw_primary}
+              tags={post.data.tags}
+              image={post.data.image}
+            />
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {totalPages > 1 && (
+      <nav
+        aria-label={`${blogLabels.page[l]} navigation`}
+        class="mt-12 flex items-center justify-center gap-2"
+      >
+        {safePage > 1 && (
+          <a
+            href={buildPageUrl(safePage - 1, tagParam)}
+            class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+          >
+            ← {blogLabels.prev[l]}
+          </a>
+        )}
+        <span class="text-sm text-gray-500">
+          {blogLabels.page[l]} {safePage} / {totalPages}
+        </span>
+        {safePage < totalPages && (
+          <a
+            href={buildPageUrl(safePage + 1, tagParam)}
+            class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+          >
+            {blogLabels.next[l]} →
+          </a>
+        )}
+      </nav>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,431 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../../site.config.ts";
+---
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Communication Non-Violente pour couples</p>
+        <h1 id="hero-heading" class="hero-title">
+          Arrêtez de vous disputer en boucle.<br />
+          <span class="text-primary">Parlez-vous enfin vraiment.</span>
+        </h1>
+        <p class="hero-description">
+          La méthode CNV appliquée au couple — des scripts concrets pour transformer vos conflits
+          en dialogues, sans jargon psy, sans effort surhumain.
+        </p>
+        <p class="hero-tagline">
+          12 scripts de conversations difficiles prêts à utiliser ce soir.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/pdf" class="btn-primary">
+            Voir le guide CNV — 22&nbsp;€
+          </a>
+          <a href="/download" class="btn-secondary">
+            5 phrases CNV gratuites
+          </a>
+        </div>
+
+        <p class="hero-social-proof">
+          Rejoignez les couples qui ont décidé de se parler autrement.
+        </p>
+      </div>
+
+      <!-- Hero visual -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-placeholder">
+          <div class="hero-placeholder-inner">
+            <p class="placeholder-title">Guide CNV Couple</p>
+            <p class="placeholder-subtitle">12 Scripts · 28 pages</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain Points Section -->
+  <section class="pain-points" aria-labelledby="pain-heading">
+    <div class="section-inner">
+      <h2 id="pain-heading" class="section-title">Vous reconnaissez-vous ?</h2>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <div class="pain-icon" aria-hidden="true">&#x1F504;</div>
+          <h3>Les mêmes disputes en boucle</h3>
+          <p>Vous avez l'impression de rejouer toujours le même film — sans jamais trouver l'issue.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon" aria-hidden="true">&#x1F910;</div>
+          <h3>Les non-dits qui s'accumulent</h3>
+          <p>Vous ravallez ce que vous pensez vraiment pour éviter le conflit, mais ça ressort autrement.</p>
+        </div>
+        <div class="pain-card">
+          <div class="pain-icon" aria-hidden="true">&#x1F494;</div>
+          <h3>Le sentiment de ne pas être entendu</h3>
+          <p>Vous parlez, mais l'autre ne comprend pas. Ou l'inverse. Et la distance s'installe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" aria-labelledby="features-heading">
+    <div class="section-inner">
+      <h2 id="features-heading" class="section-title">
+        La CNV : une méthode concrète, pas un cours de psy
+      </h2>
+      <p class="section-subtitle">
+        La Communication Non-Violente (CNV) transforme les accusations en besoins exprimés,
+        et les disputes en vraies conversations. Appliquée au couple, elle change tout.
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-number">01</div>
+          <h3>Scripts prêts à l'emploi</h3>
+          <p>
+            12 conversations difficiles rédigées mot pour mot : reproches, jalousie, distance,
+            désaccords, manque d'intimité — vous n'avez qu'à adapter.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number">02</div>
+          <h3>Méthode en 4 étapes</h3>
+          <p>
+            Observation · Sentiment · Besoin · Demande. Appris en 10 minutes, applicable ce soir.
+            Sans jargon, sans théorie creuse.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number">03</div>
+          <h3>Protocole réparateur</h3>
+          <p>
+            Un script spécial "après la dispute" pour désamorcer la tension, reconnaitre ce qui
+            s'est passé et repartir sur des bases saines.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number">04</div>
+          <h3>Rituels de couple</h3>
+          <p>
+            3 rituels de communication hebdomadaires pour maintenir la connexion — même quand
+            la vie quotidienne prend toute la place.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="section-inner cta-inner">
+      <h2 id="cta-heading" class="cta-title">
+        Commencez à parler autrement — dès ce soir
+      </h2>
+      <p class="cta-description">
+        28 pages. 12 scripts. Une méthode éprouvée. Tout ce dont vous avez besoin pour transformer
+        la façon dont vous communiquez avec votre partenaire.
+      </p>
+      <div class="cta-actions">
+        <a href="/pdf" class="btn-primary btn-large">
+          Obtenir le guide CNV — 22&nbsp;€
+        </a>
+        <a href="/download" class="btn-ghost">
+          Ou télécharger les 5 phrases CNV gratuites
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: 5rem 1rem;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-primary) 8%, white) 0%,
+      white 60%
+    );
+  }
+  .hero-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.75rem;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111827;
+    margin: 0 0 1rem;
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .hero-description {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin: 0 0 0.5rem;
+    line-height: 1.7;
+  }
+  .hero-tagline {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0 0 2rem;
+    font-style: italic;
+  }
+  .hero-social-proof {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin: 1rem 0 0;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .btn-primary:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+  .btn-primary.btn-large {
+    padding: 1rem 2.25rem;
+    font-size: 1.125rem;
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .btn-secondary:hover {
+    background: var(--color-primary);
+    color: #fff;
+  }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    background: transparent;
+    color: color-mix(in srgb, white 75%, transparent);
+    border: 1px solid color-mix(in srgb, white 35%, transparent);
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-ghost:hover {
+    color: #fff;
+    border-color: #fff;
+  }
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--color-primary) 20%, white),
+      color-mix(in srgb, var(--color-accent) 25%, white)
+    );
+    border-radius: 1rem;
+    border: 2px solid color-mix(in srgb, var(--color-primary) 20%, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 60px color-mix(in srgb, var(--color-primary) 15%, transparent);
+  }
+  .hero-placeholder-inner {
+    text-align: center;
+  }
+  .placeholder-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.5rem;
+  }
+  .placeholder-subtitle {
+    font-size: 0.875rem;
+    color: color-mix(in srgb, var(--color-primary) 70%, black);
+    margin: 0;
+  }
+
+  /* Sections communes */
+  .section-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .section-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: #111827;
+    text-align: center;
+    margin: 0 0 1rem;
+  }
+  .section-subtitle {
+    font-size: 1.0625rem;
+    color: #4b5563;
+    text-align: center;
+    max-width: 46rem;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+
+  /* Pain points */
+  .pain-points {
+    padding: 4rem 1rem;
+    background: #f9fafb;
+  }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .pain-card {
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 1.75rem;
+    border: 1px solid #e5e7eb;
+  }
+  .pain-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .pain-card h3 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.5rem;
+  }
+  .pain-card p {
+    font-size: 0.9375rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Features */
+  .features {
+    padding: 5rem 1rem;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .feature-card {
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+  }
+  .feature-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: color-mix(in srgb, var(--color-primary) 15%, white);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .feature-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.5rem;
+  }
+  .feature-card p {
+    font-size: 0.9375rem;
+    color: #4b5563;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 5rem 1rem;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-primary) 90%, black),
+      color-mix(in srgb, var(--color-primary) 70%, var(--color-accent))
+    );
+  }
+  .cta-inner {
+    text-align: center;
+  }
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 1rem;
+  }
+  .cta-description {
+    font-size: 1.0625rem;
+    color: color-mix(in srgb, white 80%, transparent);
+    max-width: 42rem;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .cta-actions .btn-primary {
+    background: var(--color-accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+    .hero-visual {
+      display: none;
+    }
+    .pain-grid {
+      grid-template-columns: 1fr;
+    }
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

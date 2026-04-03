@@ -1,0 +1,55 @@
+---
+import { site } from "../../site.config.ts";
+
+interface Props {
+  price: number;
+  originalPrice?: number;
+  currency?: string;
+  size?: "sm" | "md" | "lg";
+}
+
+const { price, originalPrice, currency = "EUR", size = "lg" } = Astro.props;
+
+const formatter = new Intl.NumberFormat(site.lang, {
+  style: "currency",
+  currency,
+});
+
+const priceStr = formatter.format(price);
+const originalStr = originalPrice ? formatter.format(originalPrice) : null;
+
+const discount =
+  originalPrice && originalPrice > price
+    ? Math.round(((originalPrice - price) / originalPrice) * 100)
+    : null;
+
+const sizeClasses: Record<string, string> = {
+  sm: "text-xl",
+  md: "text-2xl",
+  lg: "text-4xl",
+};
+---
+
+<div class="flex flex-wrap items-baseline gap-2">
+  <span
+    class:list={[
+      "font-bold text-[var(--color-primary)]",
+      sizeClasses[size],
+    ]}
+    aria-label={priceStr}
+  >
+    {priceStr}
+  </span>
+
+  {originalStr && (
+    <span class="text-lg text-gray-400 line-through" aria-label={`Original: ${originalStr}`}>
+      {originalStr}
+    </span>
+  )}
+
+  {discount && (
+    <span class="ml-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-[var(--color-accent)] text-white">
+      -{discount}%
+    </span>
+  )}
+</div>

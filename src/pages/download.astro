@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import OptinForm from "../components/OptinForm.astro";
+import TrustSignals from "../components/TrustSignals.astro";
+import { site } from "../../site.config.ts";
+
+let magnetData: {
+  title: string;
+  subtitle: string;
+  benefits: string[];
+  trust_signals?: Array<{ icon: string; text: string }>;
+};
+
+try {
+  const raw = await import("/content/lead-magnet.json");
+  magnetData = raw.default ?? raw;
+} catch {
+  magnetData = {
+    title: site.lang === "fr"
+      ? "Guide gratuit : démarrez dès aujourd'hui"
+      : site.lang === "de"
+      ? "Kostenloser Leitfaden: Starten Sie noch heute"
+      : site.lang === "es"
+      ? "Guía gratuita: comience hoy mismo"
+      : "Free guide: start today",
+    subtitle: site.lang === "fr"
+      ? "Recevez notre guide exclusif directement dans votre boîte mail."
+      : "Receive our exclusive guide directly in your inbox.",
+    benefits: ["Conseil 1", "Conseil 2", "Conseil 3"],
+    trust_signals: [],
+  };
+}
+
+const l = site.lang;
+
+const labels: Record<string, Record<string, string>> = {
+  metaDesc: {
+    fr: `Téléchargez gratuitement notre guide sur ${site.niche}`,
+    en: `Download our free guide about ${site.niche}`,
+    de: `Laden Sie unseren kostenlosen Leitfaden über ${site.niche} herunter`,
+    es: `Descargue nuestra guía gratuita sobre ${site.niche}`,
+  },
+  formTitle: {
+    fr: "Recevez votre guide maintenant",
+    en: "Get your guide now",
+    de: "Leitfaden jetzt erhalten",
+    es: "Obtenga su guía ahora",
+  },
+  benefitsTitle: {
+    fr: "Ce que vous allez apprendre",
+    en: "What you will learn",
+    de: "Was Sie lernen werden",
+    es: "Lo que aprenderá",
+  },
+  free: {
+    fr: "GRATUIT",
+    en: "FREE",
+    de: "KOSTENLOS",
+    es: "GRATIS",
+  },
+};
+---
+
+<BaseLayout title={magnetData.title} description={labels.metaDesc[l]} canonical="/download">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div class="space-y-8">
+        <header>
+          <span class="inline-block mb-3 px-3 py-1 rounded-full bg-[var(--color-accent)] text-white text-xs font-bold uppercase tracking-wider">
+            {labels.free[l]}
+          </span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-3">
+            {magnetData.title}
+          </h1>
+          <p class="text-lg text-gray-600">{magnetData.subtitle}</p>
+        </header>
+
+        {magnetData.benefits?.length > 0 && (
+          <section>
+            <h2 class="text-base font-semibold text-gray-800 mb-4">{labels.benefitsTitle[l]}</h2>
+            <ul class="space-y-2.5">
+              {magnetData.benefits.map((benefit) => (
+                <li class="flex items-start gap-3">
+                  <svg class="w-5 h-5 mt-0.5 text-[var(--color-primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-gray-700 text-sm">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {magnetData.trust_signals && magnetData.trust_signals.length > 0 && (
+          <TrustSignals signals={magnetData.trust_signals} layout="grid" />
+        )}
+      </div>
+
+      <div class="sticky top-24">
+        <div class="rounded-2xl border border-gray-100 bg-white shadow-xl p-7">
+          <h2 class="text-lg font-bold text-gray-900 mb-5 text-center">{labels.formTitle[l]}</h2>
+          <OptinForm />
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

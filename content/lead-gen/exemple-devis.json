@@ -1,0 +1,28 @@
+{
+  "service": "Exemple de service",
+  "zone": "France entière",
+  "headline": "Obtenez un devis gratuit en moins de 24h",
+  "subtitle": "Nous intervenons partout en France. Remplissez le formulaire et recevez votre devis personnalisé rapidement.",
+  "body": "<p>Notre équipe d'experts prend en charge votre demande et vous répond dans les <strong>24 heures ouvrées</strong>. Pas d'engagement, pas de frais cachés.</p>",
+  "trust_signals": [
+    { "icon": "⚡", "text": "Réponse sous 24h garantie" },
+    { "icon": "💬", "text": "Devis 100% gratuit et sans engagement" },
+    { "icon": "🏆", "text": "+200 clients satisfaits" },
+    { "icon": "🔒", "text": "Vos données sont protégées" }
+  ],
+  "cta": "Complétez le formulaire ci-dessous pour recevoir votre devis personnalisé.",
+  "faq": [
+    {
+      "q": "Le devis est-il vraiment gratuit ?",
+      "a": "Oui, absolument. Notre devis est gratuit et sans aucun engagement de votre part."
+    },
+    {
+      "q": "Dans quel délai serai-je contacté ?",
+      "a": "Nous nous engageons à vous répondre dans les 24 heures ouvrées suivant votre demande."
+    },
+    {
+      "q": "Intervenez-vous dans toute la France ?",
+      "a": "Oui, nous couvrons l'ensemble du territoire français. Précisez votre localisation dans votre message."
+    }
+  ]
+}

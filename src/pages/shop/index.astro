@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { site } from "../../../site.config.ts";
+
+if (!site.monetization.drop) {
+  return Astro.redirect("/", 302);
+}
+
+const allProducts = await getCollection("products");
+const products = allProducts.sort((a, b) => a.data.name.localeCompare(b.data.name));
+
+const l = site.lang;
+
+const labels: Record<string, Record<string, string>> = {
+  title: {
+    fr: "Boutique",
+    en: "Shop",
+    de: "Shop",
+    es: "Tienda",
+  },
+  desc: {
+    fr: `Découvrez notre sélection de produits ${site.niche}`,
+    en: `Discover our selection of ${site.niche} products`,
+    de: `Entdecken Sie unsere Auswahl an ${site.niche}-Produkten`,
+    es: `Descubra nuestra selección de productos ${site.niche}`,
+  },
+  empty: {
+    fr: "Aucun produit disponible pour le moment.",
+    en: "No products available at the moment.",
+    de: "Derzeit keine Produkte verfügbar.",
+    es: "No hay productos disponibles por el momento.",
+  },
+};
+---
+
+<BaseLayout title={labels.title[l]} description={labels.desc[l]}>
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">{labels.title[l]}</h1>
+      <p class="text-gray-600">{labels.desc[l]}</p>
+    </header>
+
+    {products.length === 0 ? (
+      <p class="text-gray-500 py-12 text-center">{labels.empty[l]}</p>
+    ) : (
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" role="list">
+        {products.map((product) => (
+          <li>
+            <ProductCard
+              name={product.data.name}
+              slug={product.data.slug}
+              price={product.data.price}
+              description={product.data.description}
+              images={product.data.images}
+              in_stock={product.data.in_stock}
+            />
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</BaseLayout>

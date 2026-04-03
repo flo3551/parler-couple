@@ -1,0 +1,120 @@
+---
+import { site } from "../../site.config.ts";
+
+const year = new Date().getFullYear();
+
+const legalLabels: Record<string, Record<string, string>> = {
+  privacy: {
+    fr: "Politique de confidentialité",
+    en: "Privacy Policy",
+    de: "Datenschutz",
+    es: "Privacidad",
+  },
+  terms: {
+    fr: "Mentions légales",
+    en: "Terms of Use",
+    de: "Nutzungsbedingungen",
+    es: "Términos de uso",
+  },
+  contact: {
+    fr: "Contact",
+    en: "Contact",
+    de: "Kontakt",
+    es: "Contacto",
+  },
+  rights: {
+    fr: "Tous droits réservés",
+    en: "All rights reserved",
+    de: "Alle Rechte vorbehalten",
+    es: "Todos los derechos reservados",
+  },
+};
+
+const l = site.lang;
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">{site.name}</a>
+      <p class="footer-tagline">{site.description}</p>
+    </div>
+
+    <nav class="footer-legal" aria-label="Liens légaux">
+      <ul role="list">
+        <li>
+          <a href="/privacy">{legalLabels.privacy[l]}</a>
+        </li>
+        <li>
+          <a href="/terms">{legalLabels.terms[l]}</a>
+        </li>
+        <li>
+          <a href="/contact">{legalLabels.contact[l]}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      &copy; {year} {site.name} &mdash; {legalLabels.rights[l]}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: auto;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+  }
+  .footer-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .footer-logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .footer-tagline {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    max-width: 28rem;
+  }
+  .footer-legal ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-legal a {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-legal a:hover {
+    color: var(--color-primary);
+  }
+  .footer-bottom {
+    border-top: 1px solid #e5e7eb;
+    padding: 1rem;
+    text-align: center;
+  }
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin: 0;
+  }
+</style>

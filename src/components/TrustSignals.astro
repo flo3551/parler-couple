@@ -1,0 +1,38 @@
+---
+interface TrustSignal {
+  icon: string;
+  text: string;
+}
+
+interface Props {
+  signals: TrustSignal[];
+  layout?: "row" | "grid";
+}
+
+const { signals, layout = "grid" } = Astro.props;
+---
+
+{signals.length > 0 && (
+  <ul
+    class:list={[
+      "not-prose",
+      layout === "grid"
+        ? "grid grid-cols-1 sm:grid-cols-2 gap-4"
+        : "flex flex-wrap justify-center gap-6",
+    ]}
+    role="list"
+  >
+    {signals.map((signal) => (
+      <li class="flex items-start gap-3">
+        <span
+          class="text-2xl shrink-0 mt-0.5"
+          role="img"
+          aria-hidden="true"
+        >
+          {signal.icon}
+        </span>
+        <span class="text-sm text-gray-700 leading-snug">{signal.text}</span>
+      </li>
+    ))}
+  </ul>
+)}

@@ -1,0 +1,180 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import { site } from "../../../site.config.ts";
+
+export async function getStaticPaths() {
+  if (!site.monetization.drop) return [];
+  const products = await getCollection("products");
+  return products.map((p) => ({ params: { slug: p.data.slug }, props: { product: p } }));
+}
+
+const { product } = Astro.props;
+const p = product.data;
+const l = site.lang;
+
+const labels: Record<string, Record<string, string>> = {
+  shopLabel: { fr: "Boutique", en: "Shop", de: "Shop", es: "Tienda" },
+  buy: { fr: "Acheter maintenant", en: "Buy now", de: "Jetzt kaufen", es: "Comprar ahora" },
+  outOfStock: { fr: "Rupture de stock", en: "Out of stock", de: "Nicht verfügbar", es: "Sin stock" },
+  features: { fr: "Caractéristiques", en: "Features", de: "Merkmale", es: "Características" },
+  reviews: { fr: "Avis clients", en: "Customer reviews", de: "Kundenbewertungen", es: "Reseñas" },
+  related: { fr: "Aller plus loin", en: "Learn more", de: "Mehr erfahren", es: "Saber más" },
+  pdfCta: { fr: "Télécharger notre guide PDF", en: "Download our PDF guide", de: "PDF-Leitfaden laden", es: "Descargar guía PDF" },
+};
+
+const priceFormatted = new Intl.NumberFormat(l, { style: "currency", currency: "EUR" }).format(p.price);
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: p.name,
+  description: p.description,
+  image: p.images[0] ?? "",
+  keywords: p.seo_kw.join(", "),
+  offers: {
+    "@type": "Offer",
+    url: new URL(`/shop/${p.slug}`, site.domain || "https://parler-couple.vercel.app").href,
+    price: p.price.toFixed(2),
+    priceCurrency: "EUR",
+    availability: p.in_stock
+      ? "https://schema.org/InStock"
+      : "https://schema.org/OutOfStock",
+  },
+};
+
+// Simulated reviews — placeholders replaced per-product by content editors
+const reviews = [
+  { author: "Client A", rating: 5, text: "Excellent produit, livraison rapide." },
+  { author: "Client B", rating: 4, text: "Très bon rapport qualité-prix." },
+  { author: "Client C", rating: 5, text: "Je recommande vivement." },
+];
+---
+
+<BaseLayout
+  title={p.name}
+  description={p.description}
+  canonical={`/shop/${p.slug}`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} slot="head" />
+
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <Breadcrumb
+      crumbs={[
+        { label: labels.shopLabel[l], href: "/shop" },
+        { label: p.name, href: `/shop/${p.slug}` },
+      ]}
+    />
+
+    <div class="mt-6 grid lg:grid-cols-2 gap-10">
+      <div class="space-y-3">
+        {p.images.length > 0 ? (
+          <img
+            src={p.images[0]}
+            alt={p.name}
+            class="w-full rounded-xl object-cover aspect-square"
+            loading="eager"
+          />
+        ) : (
+          <div class="w-full rounded-xl bg-gray-100 aspect-square flex items-center justify-center">
+            <span class="text-gray-400 text-sm">No image</span>
+          </div>
+        )}
+        {p.images.length > 1 && (
+          <div class="grid grid-cols-4 gap-2">
+            {p.images.slice(1, 5).map((img) => (
+              <img src={img} alt={p.name} loading="lazy" class="rounded-lg object-cover aspect-square w-full" />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">{p.name}</h1>
+          <p class="text-2xl font-bold text-[var(--color-primary)]">{priceFormatted}</p>
+        </div>
+
+        <p class="text-gray-600 leading-relaxed">{p.description}</p>
+
+        {p.features.length > 0 && (
+          <div>
+            <h2 class="text-base font-semibold text-gray-800 mb-3">{labels.features[l]}</h2>
+            <ul class="space-y-2">
+              {p.features.map((feat) => (
+                <li class="flex items-start gap-2 text-sm text-gray-700">
+                  <svg class="w-4 h-4 mt-0.5 text-[var(--color-primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {feat}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div class="mt-auto space-y-3">
+          {p.in_stock ? (
+            <a
+              href={p.supplier_url}
+              rel="noopener noreferrer nofollow"
+              target="_blank"
+              class="block w-full text-center py-3.5 px-6 bg-[var(--color-primary)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
+            >
+              {labels.buy[l]}
+            </a>
+          ) : (
+            <span class="block w-full text-center py-3.5 px-6 bg-gray-200 text-gray-500 font-semibold rounded-xl cursor-not-allowed">
+              {labels.outOfStock[l]}
+            </span>
+          )}
+
+          {site.monetization.pdf && (
+            <a
+              href="/pdf"
+              class="block w-full text-center py-3 px-6 border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-semibold rounded-xl hover:bg-[var(--color-primary)] hover:text-white transition-colors"
+            >
+              {labels.pdfCta[l]}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <section class="mt-14">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">{labels.reviews[l]}</h2>
+      <ul class="space-y-4">
+        {reviews.map((review) => (
+          <li class="p-5 rounded-xl border border-gray-100 bg-gray-50">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="font-medium text-gray-800 text-sm">{review.author}</span>
+              <span class="text-[var(--color-accent)] text-sm" aria-label={`${review.rating}/5`}>
+                {"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}
+              </span>
+            </div>
+            <p class="text-sm text-gray-600">{review.text}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <aside class="mt-10 p-6 rounded-xl bg-gray-50 border border-gray-100">
+      <h2 class="text-base font-semibold text-gray-800 mb-3">{labels.related[l]}</h2>
+      <ul class="space-y-1.5">
+        <li>
+          <a href="/blog" class="text-sm text-[var(--color-primary)] hover:underline">
+            → {site.lang === "fr" ? "Lire nos articles" : site.lang === "de" ? "Unsere Artikel" : site.lang === "es" ? "Nuestros artículos" : "Read our articles"}
+          </a>
+        </li>
+        {site.monetization.pdf && (
+          <li>
+            <a href="/download" class="text-sm text-[var(--color-primary)] hover:underline">
+              → {site.lang === "fr" ? "Guide PDF gratuit" : site.lang === "de" ? "Kostenloses PDF" : site.lang === "es" ? "Guía PDF gratis" : "Free PDF guide"}
+            </a>
+          </li>
+        )}
+      </ul>
+    </aside>
+  </div>
+</BaseLayout>

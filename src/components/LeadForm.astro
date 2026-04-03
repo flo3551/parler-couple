@@ -1,0 +1,190 @@
+---
+import { site } from "../../site.config.ts";
+
+interface Props {
+  webhookUrl: string;
+  submitLabel?: string;
+  successMessage?: string;
+  errorMessage?: string;
+}
+
+const {
+  webhookUrl,
+  submitLabel,
+  successMessage,
+  errorMessage,
+} = Astro.props;
+
+const l = site.lang;
+
+const defaults: Record<string, Record<string, string>> = {
+  name: { fr: "Votre nom", en: "Your name", de: "Ihr Name", es: "Su nombre" },
+  email: { fr: "Votre e-mail", en: "Your email", de: "Ihre E-Mail", es: "Su correo" },
+  phone: { fr: "Votre téléphone", en: "Your phone", de: "Ihre Telefonnummer", es: "Su teléfono" },
+  message: { fr: "Votre message", en: "Your message", de: "Ihre Nachricht", es: "Su mensaje" },
+  rgpd: {
+    fr: "J'accepte que mes données soient traitées dans le cadre de ma demande.",
+    en: "I agree that my data is processed for the purpose of my request.",
+    de: "Ich stimme zu, dass meine Daten im Rahmen meiner Anfrage verarbeitet werden.",
+    es: "Acepto que mis datos sean procesados en el marco de mi solicitud.",
+  },
+  submit: { fr: "Envoyer ma demande", en: "Send request", de: "Anfrage senden", es: "Enviar solicitud" },
+  success: {
+    fr: "Votre message a bien été envoyé. Nous vous répondrons rapidement.",
+    en: "Your message has been sent. We will get back to you shortly.",
+    de: "Ihre Nachricht wurde gesendet. Wir melden uns bald.",
+    es: "Su mensaje fue enviado. Le responderemos pronto.",
+  },
+  error: {
+    fr: "Une erreur est survenue. Veuillez réessayer.",
+    en: "An error occurred. Please try again.",
+    de: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    es: "Ocurrió un error. Por favor intente de nuevo.",
+  },
+  required: { fr: "Champ requis", en: "Required field", de: "Pflichtfeld", es: "Campo requerido" },
+};
+---
+
+<form
+  id="lead-form"
+  class="space-y-5"
+  novalidate
+  data-webhook={webhookUrl}
+>
+  <div>
+    <label for="lead-name" class="block text-sm font-medium text-gray-700 mb-1">
+      {defaults.name[l]} <span class="text-red-500" aria-hidden="true">*</span>
+    </label>
+    <input
+      type="text"
+      id="lead-name"
+      name="name"
+      required
+      autocomplete="name"
+      class="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+      placeholder={defaults.name[l]}
+    />
+  </div>
+
+  <div>
+    <label for="lead-email" class="block text-sm font-medium text-gray-700 mb-1">
+      {defaults.email[l]} <span class="text-red-500" aria-hidden="true">*</span>
+    </label>
+    <input
+      type="email"
+      id="lead-email"
+      name="email"
+      required
+      autocomplete="email"
+      class="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+      placeholder={defaults.email[l]}
+    />
+  </div>
+
+  <div>
+    <label for="lead-phone" class="block text-sm font-medium text-gray-700 mb-1">
+      {defaults.phone[l]}
+    </label>
+    <input
+      type="tel"
+      id="lead-phone"
+      name="phone"
+      autocomplete="tel"
+      class="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+      placeholder={defaults.phone[l]}
+    />
+  </div>
+
+  <div>
+    <label for="lead-message" class="block text-sm font-medium text-gray-700 mb-1">
+      {defaults.message[l]} <span class="text-red-500" aria-hidden="true">*</span>
+    </label>
+    <textarea
+      id="lead-message"
+      name="message"
+      required
+      rows="4"
+      class="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition resize-y"
+      placeholder={defaults.message[l]}
+    ></textarea>
+  </div>
+
+  <div class="flex items-start gap-3">
+    <input
+      type="checkbox"
+      id="lead-rgpd"
+      name="rgpd"
+      required
+      class="mt-0.5 h-4 w-4 rounded border-gray-300 text-[var(--color-primary)] focus:ring-[var(--color-primary)]"
+    />
+    <label for="lead-rgpd" class="text-xs text-gray-600 leading-snug">
+      {defaults.rgpd[l]}
+      <span class="text-red-500 ml-0.5" aria-hidden="true">*</span>
+    </label>
+  </div>
+
+  <div
+    id="lead-success"
+    role="alert"
+    aria-live="polite"
+    class="hidden rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-800"
+  >
+    {successMessage ?? defaults.success[l]}
+  </div>
+
+  <div
+    id="lead-error"
+    role="alert"
+    aria-live="polite"
+    class="hidden rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"
+  >
+    {errorMessage ?? defaults.error[l]}
+  </div>
+
+  <button
+    type="submit"
+    class="w-full py-3 px-6 bg-[var(--color-primary)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+  >
+    {submitLabel ?? defaults.submit[l]}
+  </button>
+</form>
+
+<script>
+  const form = document.getElementById("lead-form") as HTMLFormElement | null;
+  const successEl = document.getElementById("lead-success");
+  const errorEl = document.getElementById("lead-error");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const submitBtn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+    submitBtn.disabled = true;
+
+    successEl?.classList.add("hidden");
+    errorEl?.classList.add("hidden");
+
+    const webhook = form.dataset.webhook ?? "";
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      form.reset();
+      successEl?.classList.remove("hidden");
+    } catch {
+      errorEl?.classList.remove("hidden");
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>

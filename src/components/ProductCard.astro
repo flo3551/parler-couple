@@ -1,0 +1,105 @@
+---
+import { site } from "../../site.config.ts";
+
+interface Props {
+  name: string;
+  slug: string;
+  price: number;
+  description: string;
+  images: string[];
+  in_stock: boolean;
+}
+
+const { name, slug, price, description, images, in_stock } = Astro.props;
+
+const l = site.lang;
+
+const labels: Record<string, Record<string, string>> = {
+  viewProduct: {
+    fr: "Voir le produit",
+    en: "View product",
+    de: "Produkt ansehen",
+    es: "Ver producto",
+  },
+  outOfStock: {
+    fr: "Rupture de stock",
+    en: "Out of stock",
+    de: "Nicht verfügbar",
+    es: "Sin stock",
+  },
+  inStock: {
+    fr: "En stock",
+    en: "In stock",
+    de: "Auf Lager",
+    es: "En stock",
+  },
+};
+
+const priceFormatted = new Intl.NumberFormat(l, {
+  style: "currency",
+  currency: "EUR",
+}).format(price);
+---
+
+<article
+  class="group flex flex-col rounded-xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden"
+>
+  {images.length > 0 ? (
+    <a href={`/shop/${slug}`} class="block overflow-hidden aspect-[4/3]" tabindex="-1" aria-hidden="true">
+      <img
+        src={images[0]}
+        alt={name}
+        loading="lazy"
+        decoding="async"
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+    </a>
+  ) : (
+    <div class="aspect-[4/3] bg-gray-100 flex items-center justify-center">
+      <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z" />
+      </svg>
+    </div>
+  )}
+
+  <div class="flex flex-col flex-1 p-5 gap-3">
+    <div class="flex items-start justify-between gap-2">
+      <h2 class="text-base font-semibold text-gray-900 leading-snug group-hover:text-[var(--color-primary)] transition-colors flex-1">
+        <a href={`/shop/${slug}`} class="stretched-link">{name}</a>
+      </h2>
+      <span class="text-lg font-bold text-[var(--color-primary)] whitespace-nowrap">
+        {priceFormatted}
+      </span>
+    </div>
+
+    <p class="text-sm text-gray-600 line-clamp-2 flex-1">{description}</p>
+
+    <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
+      <span
+        class:list={[
+          "text-xs font-medium px-2 py-0.5 rounded-full",
+          in_stock
+            ? "bg-green-50 text-green-700"
+            : "bg-red-50 text-red-600",
+        ]}
+      >
+        {in_stock ? labels.inStock[l] : labels.outOfStock[l]}
+      </span>
+      <span class="text-xs font-medium text-[var(--color-primary)]">
+        {labels.viewProduct[l]} →
+      </span>
+    </div>
+  </div>
+</article>
+
+<style>
+  .stretched-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  article {
+    position: relative;
+  }
+</style>

@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../../site.config.ts";
+
+if (!site.monetization.pdf) {
+  return Astro.redirect("/", 302);
+}
+
+const downloadUrl = import.meta.env.PDF_DOWNLOAD_URL ?? "#";
+const l = site.lang;
+
+const labels: Record<string, Record<string, string>> = {
+  title: {
+    fr: "Merci pour votre achat !",
+    en: "Thank you for your purchase!",
+    de: "Vielen Dank für Ihren Kauf!",
+    es: "¡Gracias por su compra!",
+  },
+  subtitle: {
+    fr: "Votre commande a bien été enregistrée.",
+    en: "Your order has been confirmed.",
+    de: "Ihre Bestellung wurde bestätigt.",
+    es: "Su pedido ha sido confirmado.",
+  },
+  downloadBtn: {
+    fr: "Télécharger mon guide PDF",
+    en: "Download my PDF guide",
+    de: "Mein PDF herunterladen",
+    es: "Descargar mi guía PDF",
+  },
+  nextTitle: {
+    fr: "Et maintenant ?",
+    en: "What's next?",
+    de: "Was kommt als nächstes?",
+    es: "¿Y ahora qué?",
+  },
+  steps: {
+    fr: [
+      "Téléchargez votre guide via le bouton ci-dessus.",
+      "Lisez-le à votre rythme — marquez les passages importants.",
+      "Mettez en pratique les conseils dès aujourd'hui.",
+    ],
+    en: [
+      "Download your guide using the button above.",
+      "Read at your own pace — highlight the key sections.",
+      "Start applying the advice today.",
+    ],
+    de: [
+      "Laden Sie Ihren Leitfaden über den Button oben herunter.",
+      "Lesen Sie in Ihrem eigenen Tempo — markieren Sie die wichtigen Stellen.",
+      "Setzen Sie die Ratschläge noch heute um.",
+    ],
+    es: [
+      "Descargue su guía usando el botón de arriba.",
+      "Léala a su ritmo — marque las secciones clave.",
+      "Comience a aplicar los consejos hoy mismo.",
+    ],
+  },
+  upsellTitle: {
+    fr: "Vous pourriez aussi aimer",
+    en: "You might also like",
+    de: "Das könnte Sie auch interessieren",
+    es: "También podría interesarle",
+  },
+  upsellBlog: {
+    fr: "Consultez nos articles gratuits",
+    en: "Browse our free articles",
+    de: "Unsere kostenlosen Artikel",
+    es: "Vea nuestros artículos gratuitos",
+  },
+  upsellLead: {
+    fr: "Demander un accompagnement personnalisé",
+    en: "Request personalized support",
+    de: "Persönliche Beratung anfordern",
+    es: "Solicitar apoyo personalizado",
+  },
+  meta: {
+    fr: "Merci — Votre guide PDF est prêt",
+    en: "Thank you — Your PDF guide is ready",
+    de: "Danke — Ihr PDF-Leitfaden ist bereit",
+    es: "Gracias — Su guía PDF está lista",
+  },
+};
+
+const steps = (labels.steps as Record<string, string[]>)[l] ?? labels.steps.en;
+---
+
+<BaseLayout
+  title={labels.meta[l]}
+  description={labels.subtitle[l]}
+  noindex={true}
+>
+  <div class="max-w-2xl mx-auto px-4 py-16 text-center space-y-12">
+    <header class="space-y-4">
+      <div class="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-green-100">
+        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900">
+        {labels.title[l]}
+      </h1>
+      <p class="text-gray-600 text-lg">{labels.subtitle[l]}</p>
+    </header>
+
+    <a
+      href={downloadUrl}
+      download
+      class="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-primary)] text-white text-lg font-bold rounded-2xl hover:opacity-90 transition-opacity shadow-lg"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+      </svg>
+      {labels.downloadBtn[l]}
+    </a>
+
+    <section class="text-left">
+      <h2 class="text-xl font-bold text-gray-900 mb-5 text-center">{labels.nextTitle[l]}</h2>
+      <ol class="space-y-3">
+        {steps.map((step, i) => (
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-[var(--color-primary)] text-white text-sm font-bold flex items-center justify-center">
+              {i + 1}
+            </span>
+            <span class="text-gray-700 mt-0.5">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="rounded-2xl bg-gray-50 border border-gray-100 p-6 text-left">
+      <h2 class="text-base font-semibold text-gray-800 mb-4 text-center">{labels.upsellTitle[l]}</h2>
+      <ul class="space-y-2">
+        <li>
+          <a href="/blog" class="text-[var(--color-primary)] hover:underline text-sm font-medium">
+            → {labels.upsellBlog[l]}
+          </a>
+        </li>
+        {site.monetization.leadGen && (
+          <li>
+            <a href="/contact" class="text-[var(--color-primary)] hover:underline text-sm font-medium">
+              → {labels.upsellLead[l]}
+            </a>
+          </li>
+        )}
+        {site.monetization.affiliation && (
+          <li>
+            <a href="/blog" class="text-[var(--color-primary)] hover:underline text-sm font-medium">
+              → {site.lang === "fr" ? "Voir nos recommandations" : site.lang === "de" ? "Unsere Empfehlungen" : site.lang === "es" ? "Nuestras recomendaciones" : "Our recommendations"}
+            </a>
+          </li>
+        )}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

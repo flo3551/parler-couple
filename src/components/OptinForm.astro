@@ -1,0 +1,140 @@
+---
+import { site } from "../../site.config.ts";
+
+interface Props {
+  submitLabel?: string;
+  successMessage?: string;
+  errorMessage?: string;
+}
+
+const { submitLabel, successMessage, errorMessage } = Astro.props;
+
+const l = site.lang;
+
+const defaults: Record<string, Record<string, string>> = {
+  email: { fr: "Votre adresse e-mail", en: "Your email address", de: "Ihre E-Mail-Adresse", es: "Su dirección de correo" },
+  rgpd: {
+    fr: "J'accepte de recevoir le guide par e-mail et d'être informé(e) des actualités du site.",
+    en: "I agree to receive the guide by email and to be informed of site updates.",
+    de: "Ich stimme zu, den Leitfaden per E-Mail zu erhalten und über Website-Neuigkeiten informiert zu werden.",
+    es: "Acepto recibir la guía por correo electrónico y ser informado de las novedades del sitio.",
+  },
+  submit: {
+    fr: "Recevoir le guide gratuit",
+    en: "Get the free guide",
+    de: "Kostenlosen Leitfaden erhalten",
+    es: "Recibir la guía gratis",
+  },
+  success: {
+    fr: "C'est fait ! Vérifiez votre boîte mail.",
+    en: "Done! Check your inbox.",
+    de: "Erledigt! Prüfen Sie Ihren Posteingang.",
+    es: "¡Listo! Revise su correo electrónico.",
+  },
+  error: {
+    fr: "Une erreur est survenue. Veuillez réessayer.",
+    en: "An error occurred. Please try again.",
+    de: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    es: "Ocurrió un error. Por favor intente de nuevo.",
+  },
+};
+---
+
+<form id="optin-form" class="space-y-4" novalidate>
+  <div>
+    <label for="optin-email" class="block text-sm font-medium text-gray-700 mb-1">
+      {defaults.email[l]} <span class="text-red-500" aria-hidden="true">*</span>
+    </label>
+    <input
+      type="email"
+      id="optin-email"
+      name="email"
+      required
+      autocomplete="email"
+      class="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent transition"
+      placeholder={defaults.email[l]}
+    />
+  </div>
+
+  <div class="flex items-start gap-3">
+    <input
+      type="checkbox"
+      id="optin-rgpd"
+      name="rgpd"
+      required
+      class="mt-0.5 h-4 w-4 rounded border-gray-300 text-[var(--color-primary)] focus:ring-[var(--color-primary)]"
+    />
+    <label for="optin-rgpd" class="text-xs text-gray-600 leading-snug">
+      {defaults.rgpd[l]}
+      <span class="text-red-500 ml-0.5" aria-hidden="true">*</span>
+    </label>
+  </div>
+
+  <div
+    id="optin-success"
+    role="alert"
+    aria-live="polite"
+    class="hidden rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-800"
+  >
+    {successMessage ?? defaults.success[l]}
+  </div>
+
+  <div
+    id="optin-error"
+    role="alert"
+    aria-live="polite"
+    class="hidden rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"
+  >
+    {errorMessage ?? defaults.error[l]}
+  </div>
+
+  <button
+    type="submit"
+    class="w-full py-3 px-6 bg-[var(--color-accent)] text-white font-bold rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed text-base"
+  >
+    {submitLabel ?? defaults.submit[l]}
+  </button>
+</form>
+
+<script>
+  const form = document.getElementById("optin-form") as HTMLFormElement | null;
+  const successEl = document.getElementById("optin-success");
+  const errorEl = document.getElementById("optin-error");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const btn = form.querySelector("button[type=submit]") as HTMLButtonElement;
+    btn.disabled = true;
+    successEl?.classList.add("hidden");
+    errorEl?.classList.add("hidden");
+
+    const email = (form.querySelector("#optin-email") as HTMLInputElement)?.value;
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const json = await res.json().catch(() => ({}));
+
+      if (!res.ok || json.error) {
+        throw new Error(json.error ?? `HTTP ${res.status}`);
+      }
+
+      form.reset();
+      form.hidden = true;
+      successEl?.classList.remove("hidden");
+    } catch {
+      errorEl?.classList.remove("hidden");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
