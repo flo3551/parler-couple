@@ -1,0 +1,25 @@
+{
+  "name": "Jeu de Cartes de Conversations pour Couples",
+  "slug": "cartes-conversation-couple",
+  "price": 14.90,
+  "supplier_url": "https://www.aliexpress.com/wholesale?SearchText=couples+conversation+cards+french",
+  "description": "On croit se connaître par coeur — et puis une carte sort, et on découvre quelque chose qu'on ne savait pas. Ce jeu de cartes de conversation pour couples propose des questions à la fois légères et profondes, pour briser les silences, retrouver de la complicité ou simplement passer une belle soirée à deux. Pas besoin d'un prétexte spécial : posez le paquet sur la table, picorez une carte ou jouez à la suite. Les questions sont pensées pour ouvrir des échanges vrais, sans tomber dans l'introspection pesante ni les anecdotes superficielles. Format compact, facile à glisser dans un sac ou à emmener en week-end. Un bon point de départ pour les couples qui veulent ralentir et se retrouver — ou un cadeau simple qui dit quelque chose d'important.",
+  "features": [
+    "Questions variées : légères, profondes, amusantes et émouvantes",
+    "Format carte résistant, facile à manipuler",
+    "Utilisable seul à deux ou lors d'une soirée avec d'autres couples",
+    "Livraison rapide depuis entrepôt Europe sous 7 à 9 jours",
+    "Idéal comme cadeau pour anniversaire, Saint-Valentin ou sans occasion particulière"
+  ],
+  "seo_kw": [
+    "jeu de cartes couple",
+    "cartes conversation couple",
+    "activite couple maison",
+    "questions couple profondeur",
+    "jeu soirée couple"
+  ],
+  "images": [],
+  "in_stock": true,
+  "copy_hook": "Une soirée, un paquet de cartes, et des conversations dont vous vous souviendrez.",
+  "internal_links": ["/shop", "/guide-communication-couple-pdf"]
+}

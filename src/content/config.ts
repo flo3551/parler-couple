@@ -30,6 +30,8 @@ const products = defineCollection({
     seo_kw: z.array(z.string()).default([]),
     images: z.array(z.string()).default([]),
     in_stock: z.boolean().default(true),
+    copy_hook: z.string().optional(),
+    internal_links: z.array(z.string()).default([]),
   }),
 });
 
