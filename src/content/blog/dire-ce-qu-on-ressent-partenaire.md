@@ -139,3 +139,7 @@ Pour aller plus loin dans la compréhension des [exercices pour mieux s'exprimer
 Et si tu reconnais dans cet article le poids de tout ce que tu n'as pas dit jusqu'à maintenant, l'article sur [pourquoi on accumule les non-dits](/les-non-dits-en-couple) te donnera les clés pour comprendre le mécanisme — et comment commencer à le dénouer.
 
 Apprendre à dire ce qu'on ressent, c'est un travail. Mais c'est aussi, à terme, l'une des formes les plus concrètes qu'on puisse donner à l'amour.
+
+---
+
+**À lire aussi :** Tout sur les [non-dits dans la relation de couple](/non-dits-couple) — leur origine, leur coût, et comment les dénouer progressivement.

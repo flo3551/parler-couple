@@ -146,3 +146,10 @@ C'est ça, briser un cycle : non pas l'anéantir d'un coup, mais l'interrompre a
 Les [scripts pour briser les cycles de dispute](/guide-communication-couple-pdf) peuvent vous donner les formulations concrètes pour ces moments critiques — des phrases pensées pour interrompre l'escalade et rouvrir une vraie conversation.
 
 Parce que vous méritez de parler autrement. Tous les deux.
+
+---
+
+**À lire aussi :** 
+- [Gérer les conflits en couple](/conflits-couple) — comprendre les patterns pour mieux les désamorcer
+- [Se disputer sans se blesser](/se-disputer-sans-se-blesser) — les techniques de désamorçage au moment chaud  
+- [Renouer le dialogue après une dispute](/renouer-dialogue-conjoint) — la prochaine étape après le cycle brisé

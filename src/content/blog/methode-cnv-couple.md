@@ -143,3 +143,7 @@ Et ça, ça change tout.
 ---
 
 Pour aller plus loin, retrouve les [cartes CNV pour pratiquer ensemble](/shop/cartes-conversation-couple) — un outil simple pour ancrer la méthode dans ton quotidien, une conversation à la fois.
+
+---
+
+**À lire aussi :** Retrouve tous nos guides sur la [méthode CNV en couple](/communication-cnv) pour approfondir chaque aspect de cette pratique.

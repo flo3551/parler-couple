@@ -121,3 +121,10 @@ Pour apprendre à formuler ces besoins sans déclencher de défensive, la [méth
 Et pour apprendre à [comment dire ce qu'on ressent vraiment](/dire-ce-qu-on-ressent-partenaire) à son partenaire, l'article suivant va plus loin dans les techniques de reformulation émotionnelle.
 
 Le silence a longtemps semblé plus facile. Mais la vraie facilité, à long terme, c'est un couple où on peut se parler.
+
+---
+
+**À lire aussi :**
+- [La communication non-violente en couple](/communication-non-violente-couple) — le cadre théorique derrière ces techniques d'expression
+- [Quand on ne se parle plus en couple](/on-ne-se-parle-plus-couple) — les non-dits qui s'accumulent mènent souvent là
+- [Exercices pratiques à faire chez soi](/download) — pour commencer à s'exprimer autrement dès ce soir

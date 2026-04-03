@@ -126,3 +126,7 @@ L'article sur [quand on ne se parle plus en couple](/on-ne-se-parle-plus-couple)
 Pour ceux qui souhaitent aller plus loin avec des outils concrets, le [guide pratique pour recommencer à se parler](/guide-communication-couple-pdf) propose des scripts, des exercices et des questions guidées pour traverser cette période de reconstruction à votre propre rythme.
 
 Renouer avec son conjoint ne demande pas de tout changer du jour au lendemain. Ça demande une première phrase courageuse, un rendez-vous régulier, et la conviction que ce qui a été peut, avec un peu de soin, revenir.
+
+---
+
+**À lire aussi :** Explore tous nos guides sur les [crises de communication](/crises-couple) ou découvre le [kit pour traverser les conversations difficiles](/shop/kit-conversation-difficile) — des outils concrets pour les moments qui comptent le plus.

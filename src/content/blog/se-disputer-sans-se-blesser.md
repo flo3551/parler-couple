@@ -151,3 +151,7 @@ Cette connaissance de soi — c'est ce qui permet de changer. Pas des techniques
 Pour aller plus loin et avoir des phrases concrètes à utiliser dans ces moments chauds, le guide "[phrases pour ne plus blesser son partenaire](/guide-communication-couple-pdf)" est une ressource pratique que tu peux avoir à portée de main.
 
 Parce qu'au fond, l'objectif n'est pas de ne plus jamais se disputer. C'est de se disputer d'une façon qui vous rapproche plutôt que de vous abîmer.
+
+---
+
+**À lire aussi :** Retrouve tous nos conseils sur les [conflits de couple](/conflits-couple) pour aller plus loin dans la compréhension de ces dynamiques.

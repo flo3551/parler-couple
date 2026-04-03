@@ -131,3 +131,7 @@ Si tu veux aller plus loin avec ta méthode et des exemples de formulations dire
 Et si tu veux comprendre la structure complète étape par étape, l'article sur la [méthode CNV appliquée au couple](/methode-cnv-couple) détaille chaque pilier avec des exemples de disputes transformées.
 
 Parler mieux, ça s'apprend. Et contrairement à ce qu'on croit, ça ne prend pas des années.
+
+---
+
+**À lire aussi :** Explore [tous nos guides CNV pour les couples](/communication-cnv) ou découvre les [cartes de conversation CNV](/shop/cartes-conversation-couple) pour pratiquer ensemble au quotidien.

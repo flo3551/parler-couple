@@ -114,3 +114,7 @@ Pour aller plus loin avec une méthode étape par étape, l'article sur [comment
 Et si la situation dans votre couple semble avoir dépassé ce qu'on peut dénouer à deux, le [kit pour relancer les conversations difficiles](/shop/kit-conversation-difficile) offre des outils guidés pour reprendre le dialogue dans un cadre structuré.
 
 Le silence n'est pas une fatalité. Même les couples les plus silencieux ont des ressources — à condition de choisir d'y accéder.
+
+---
+
+**À lire aussi :** Retrouve tous nos guides sur les [crises de communication en couple](/crises-couple) — du premier silence pesant à la reconstruction du dialogue.
