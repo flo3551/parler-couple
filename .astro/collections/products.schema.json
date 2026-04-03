@@ -45,6 +45,16 @@
           "type": "boolean",
           "default": true
         },
+        "copy_hook": {
+          "type": "string"
+        },
+        "internal_links": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
         "$schema": {
           "type": "string"
         }

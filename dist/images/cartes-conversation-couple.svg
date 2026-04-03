@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <!-- Background -->
+  <rect width="800" height="800" fill="#FFF8F0"/>
+
+  <!-- Decorative card fan in top-right -->
+  <!-- Card 1 - rotated far right -->
+  <rect x="540" y="60" width="160" height="220" rx="14" fill="#5C3D7A" transform="rotate(30 620 170)"/>
+  <!-- Card 2 - rotated medium -->
+  <rect x="530" y="55" width="160" height="220" rx="14" fill="#E07B5A" transform="rotate(15 610 165)"/>
+  <!-- Card 3 - top card, slight angle -->
+  <rect x="520" y="50" width="160" height="220" rx="14" fill="#5C3D7A" transform="rotate(3 600 160)"/>
+  <!-- Top card face detail -->
+  <rect x="522" y="52" width="156" height="216" rx="13" fill="#fff" fill-opacity="0.15" transform="rotate(3 600 160)"/>
+
+  <!-- Hearts decoration -->
+  <!-- Heart 1 -->
+  <g transform="translate(120, 160) scale(2.2)">
+    <path d="M20 8 C20 4 17 2 14 2 C11.5 2 9.5 3.5 8.5 5.5 C7.5 3.5 5.5 2 3 2 C0 2 -3 4 -3 8 C-3 14 8.5 22 8.5 22 C8.5 22 20 14 20 8Z" fill="#E07B5A" opacity="0.85"/>
+  </g>
+  <!-- Heart 2 (smaller) -->
+  <g transform="translate(200, 110) scale(1.4)">
+    <path d="M20 8 C20 4 17 2 14 2 C11.5 2 9.5 3.5 8.5 5.5 C7.5 3.5 5.5 2 3 2 C0 2 -3 4 -3 8 C-3 14 8.5 22 8.5 22 C8.5 22 20 14 20 8Z" fill="#E07B5A" opacity="0.5"/>
+  </g>
+  <!-- Heart 3 (tiny) -->
+  <g transform="translate(310, 145) scale(1.0)">
+    <path d="M20 8 C20 4 17 2 14 2 C11.5 2 9.5 3.5 8.5 5.5 C7.5 3.5 5.5 2 3 2 C0 2 -3 4 -3 8 C-3 14 8.5 22 8.5 22 C8.5 22 20 14 20 8Z" fill="#E07B5A" opacity="0.35"/>
+  </g>
+
+  <!-- Decorative dots row -->
+  <circle cx="80" cy="400" r="5" fill="#E07B5A" opacity="0.4"/>
+  <circle cx="110" cy="400" r="5" fill="#5C3D7A" opacity="0.3"/>
+  <circle cx="140" cy="400" r="5" fill="#E07B5A" opacity="0.4"/>
+
+  <!-- Main text block - centered lower half -->
+  <!-- "CARTES" -->
+  <text x="400" y="480" font-family="Georgia, serif" font-size="92" font-weight="bold" fill="#5C3D7A" text-anchor="middle" letter-spacing="8">CARTES</text>
+
+  <!-- Divider line -->
+  <line x1="160" y1="510" x2="640" y2="510" stroke="#E07B5A" stroke-width="2.5" opacity="0.6"/>
+
+  <!-- "CONVERSATION" -->
+  <text x="400" y="600" font-family="Georgia, serif" font-size="60" font-weight="bold" fill="#5C3D7A" text-anchor="middle" letter-spacing="4">CONVERSATION</text>
+
+  <!-- "COUPLE" accent -->
+  <text x="400" y="680" font-family="Georgia, serif" font-size="50" font-weight="bold" fill="#E07B5A" text-anchor="middle" letter-spacing="10">COUPLE</text>
+
+  <!-- Decorative bottom hearts row -->
+  <g transform="translate(300, 720) scale(0.9)">
+    <path d="M20 8 C20 4 17 2 14 2 C11.5 2 9.5 3.5 8.5 5.5 C7.5 3.5 5.5 2 3 2 C0 2 -3 4 -3 8 C-3 14 8.5 22 8.5 22 C8.5 22 20 14 20 8Z" fill="#E07B5A" opacity="0.6"/>
+  </g>
+  <g transform="translate(360, 720) scale(0.9)">
+    <path d="M20 8 C20 4 17 2 14 2 C11.5 2 9.5 3.5 8.5 5.5 C7.5 3.5 5.5 2 3 2 C0 2 -3 4 -3 8 C-3 14 8.5 22 8.5 22 C8.5 22 20 14 20 8Z" fill="#5C3D7A" opacity="0.4"/>
+  </g>
+  <g transform="translate(420, 720) scale(0.9)">
+    <path d="M20 8 C20 4 17 2 14 2 C11.5 2 9.5 3.5 8.5 5.5 C7.5 3.5 5.5 2 3 2 C0 2 -3 4 -3 8 C-3 14 8.5 22 8.5 22 C8.5 22 20 14 20 8Z" fill="#E07B5A" opacity="0.6"/>
+  </g>
+
+  <!-- Subtle border frame -->
+  <rect x="18" y="18" width="764" height="764" rx="20" fill="none" stroke="#5C3D7A" stroke-width="2" opacity="0.12"/>
+</svg>

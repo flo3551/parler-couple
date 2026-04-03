@@ -141,9 +141,79 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"communication-non-violente-couple.md": {
+	id: "communication-non-violente-couple.md";
+  slug: "communication-non-violente-couple";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"dire-ce-qu-on-ressent-partenaire.md": {
+	id: "dire-ce-qu-on-ressent-partenaire.md";
+  slug: "dire-ce-qu-on-ressent-partenaire";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"disputes-recurrentes-couple.md": {
+	id: "disputes-recurrentes-couple.md";
+  slug: "disputes-recurrentes-couple";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "exemple-article.md": {
 	id: "exemple-article.md";
   slug: "exemple-article";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"gerer-conflits-couple.md": {
+	id: "gerer-conflits-couple.md";
+  slug: "gerer-conflits-couple";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-non-dits-en-couple.md": {
+	id: "les-non-dits-en-couple.md";
+  slug: "les-non-dits-en-couple";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"methode-cnv-couple.md": {
+	id: "methode-cnv-couple.md";
+  slug: "methode-cnv-couple";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"on-ne-se-parle-plus-couple.md": {
+	id: "on-ne-se-parle-plus-couple.md";
+  slug: "on-ne-se-parle-plus-couple";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"renouer-dialogue-conjoint.md": {
+	id: "renouer-dialogue-conjoint.md";
+  slug: "renouer-dialogue-conjoint";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"se-disputer-sans-se-blesser.md": {
+	id: "se-disputer-sans-se-blesser.md";
+  slug: "se-disputer-sans-se-blesser";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"therapie-couple-en-ligne.md": {
+	id: "therapie-couple-en-ligne.md";
+  slug: "therapie-couple-en-ligne";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
@@ -153,11 +223,23 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		"products": Record<string, {
-  id: string;
+		"products": {
+"cartes-conversation-couple": {
+	id: "cartes-conversation-couple";
   collection: "products";
-  data: InferEntrySchema<"products">;
-}>;
+  data: InferEntrySchema<"products">
+};
+"journal-couple": {
+	id: "journal-couple";
+  collection: "products";
+  data: InferEntrySchema<"products">
+};
+"kit-conversation-difficile": {
+	id: "kit-conversation-difficile";
+  collection: "products";
+  data: InferEntrySchema<"products">
+};
+};
 
 	};
 

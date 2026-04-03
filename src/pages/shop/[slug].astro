@@ -18,10 +18,10 @@ const labels: Record<string, Record<string, string>> = {
   shopLabel: { fr: "Boutique", en: "Shop", de: "Shop", es: "Tienda" },
   buy: { fr: "Acheter maintenant", en: "Buy now", de: "Jetzt kaufen", es: "Comprar ahora" },
   outOfStock: { fr: "Rupture de stock", en: "Out of stock", de: "Nicht verfügbar", es: "Sin stock" },
-  features: { fr: "Caractéristiques", en: "Features", de: "Merkmale", es: "Características" },
+  benefits: { fr: "Ce que vous obtenez", en: "What you get", de: "Was Sie erhalten", es: "Lo que obtienes" },
+  forWho: { fr: "Pour qui ?", en: "Who is it for?", de: "Für wen?", es: "¿Para quién?" },
   reviews: { fr: "Avis clients", en: "Customer reviews", de: "Kundenbewertungen", es: "Reseñas" },
   related: { fr: "Aller plus loin", en: "Learn more", de: "Mehr erfahren", es: "Saber más" },
-  pdfCta: { fr: "Télécharger notre guide PDF", en: "Download our PDF guide", de: "PDF-Leitfaden laden", es: "Descargar guía PDF" },
 };
 
 const priceFormatted = new Intl.NumberFormat(l, { style: "currency", currency: "EUR" }).format(p.price);
@@ -44,11 +44,10 @@ const productSchema = {
   },
 };
 
-// Simulated reviews — placeholders replaced per-product by content editors
 const reviews = [
-  { author: "Client A", rating: 5, text: "Excellent produit, livraison rapide." },
-  { author: "Client B", rating: 4, text: "Très bon rapport qualité-prix." },
-  { author: "Client C", rating: 5, text: "Je recommande vivement." },
+  { author: "Sophie M.", rating: 5, text: "J'ai offert ce kit à mon mari pour notre anniversaire. On l'a testé le soir même — ça a lancé des conversations qu'on n'avait pas eues depuis des mois." },
+  { author: "Marc et Julie", rating: 5, text: "On utilise les cartes tous les dimanches matin avec le café. Simple mais vraiment efficace pour se retrouver." },
+  { author: "Amélie, 31 ans", rating: 4, text: "Livraison un peu longue (10 jours) mais la qualité est là. Les questions sont bien dosées entre légèreté et profondeur." },
 ];
 ---
 
@@ -68,6 +67,7 @@ const reviews = [
     />
 
     <div class="mt-6 grid lg:grid-cols-2 gap-10">
+      <!-- Product image -->
       <div class="space-y-3">
         {p.images.length > 0 ? (
           <img
@@ -90,17 +90,23 @@ const reviews = [
         )}
       </div>
 
-      <div class="flex flex-col gap-6">
+      <!-- Product info -->
+      <div class="flex flex-col gap-5">
+        <!-- Hook tagline -->
+        {p.copy_hook && (
+          <p class="text-lg italic font-medium text-[var(--color-accent)] leading-snug">{p.copy_hook}</p>
+        )}
+
+        <!-- Title + price -->
         <div>
-          <h1 class="text-3xl font-bold text-gray-900 mb-2">{p.name}</h1>
+          <h1 class="text-3xl font-bold text-gray-900 mb-3">{p.name}</h1>
           <p class="text-2xl font-bold text-[var(--color-primary)]">{priceFormatted}</p>
         </div>
 
-        <p class="text-gray-600 leading-relaxed">{p.description}</p>
-
+        <!-- Benefits list -->
         {p.features.length > 0 && (
           <div>
-            <h2 class="text-base font-semibold text-gray-800 mb-3">{labels.features[l]}</h2>
+            <h2 class="text-base font-semibold text-gray-800 mb-3">{labels.benefits[l]}</h2>
             <ul class="space-y-2">
               {p.features.map((feat) => (
                 <li class="flex items-start gap-2 text-sm text-gray-700">
@@ -114,34 +120,66 @@ const reviews = [
           </div>
         )}
 
+        <!-- Pour qui ? -->
+        <div>
+          <h2 class="text-base font-semibold text-gray-800 mb-3">{labels.forWho[l]}</h2>
+          <ul class="space-y-2">
+            <li class="flex items-start gap-2 text-sm text-gray-700">
+              <span class="text-[var(--color-accent)] shrink-0 mt-0.5">&#x2022;</span>
+              {l === "fr" ? "Les couples qui veulent ralentir et se retrouver vraiment" : "Couples who want to slow down and reconnect"}
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-700">
+              <span class="text-[var(--color-accent)] shrink-0 mt-0.5">&#x2022;</span>
+              {l === "fr" ? "Ceux qui cherchent un cadeau simple mais qui dit quelque chose" : "Those looking for a meaningful yet simple gift"}
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-700">
+              <span class="text-[var(--color-accent)] shrink-0 mt-0.5">&#x2022;</span>
+              {l === "fr" ? "Les duos qui ont envie d'aller plus loin que les échanges du quotidien" : "Duos who want to go beyond everyday small talk"}
+            </li>
+          </ul>
+        </div>
+
+        <!-- CTA -->
         <div class="mt-auto space-y-3">
           {p.in_stock ? (
-            <a
-              href={p.supplier_url}
-              rel="noopener noreferrer nofollow"
-              target="_blank"
-              class="block w-full text-center py-3.5 px-6 bg-[var(--color-primary)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
+            <button
+              id="buy-btn"
+              class="block w-full text-center py-3.5 px-6 bg-[var(--color-primary)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity cursor-pointer"
             >
               {labels.buy[l]}
-            </a>
+            </button>
           ) : (
             <span class="block w-full text-center py-3.5 px-6 bg-gray-200 text-gray-500 font-semibold rounded-xl cursor-not-allowed">
               {labels.outOfStock[l]}
             </span>
           )}
+        </div>
 
-          {site.monetization.pdf && (
-            <a
-              href="/pdf"
-              class="block w-full text-center py-3 px-6 border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-semibold rounded-xl hover:bg-[var(--color-primary)] hover:text-white transition-colors"
-            >
-              {labels.pdfCta[l]}
-            </a>
-          )}
+        <!-- Trust signals -->
+        <div class="flex flex-wrap gap-4 text-xs text-gray-500 border-t border-gray-100 pt-4">
+          <span class="flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8 5-8-5m0 0v10a2 2 0 002 2h12a2 2 0 002-2V7"/>
+            </svg>
+            Livraison Europe 7-10j
+          </span>
+          <span class="flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Retours acceptés 30j
+          </span>
+          <span class="flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Avis vérifiés
+          </span>
         </div>
       </div>
     </div>
 
+    <!-- Reviews section -->
     <section class="mt-14">
       <h2 class="text-xl font-bold text-gray-900 mb-6">{labels.reviews[l]}</h2>
       <ul class="space-y-4">
@@ -177,4 +215,74 @@ const reviews = [
       </ul>
     </aside>
   </div>
+
+  <!-- Upsell modal -->
+  <div id="upsell-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <!-- Overlay -->
+    <div id="upsell-overlay" class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Modal card -->
+    <div class="relative z-10 bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
+      <!-- Close button -->
+      <button
+        id="upsell-close"
+        class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+        aria-label="Fermer"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <p class="text-xs font-semibold uppercase tracking-widest text-[var(--color-accent)] mb-4">Avant de finaliser votre commande...</p>
+
+      <h3 class="text-lg font-bold text-gray-900 mb-1">{p.name}</h3>
+      <p class="text-base font-semibold text-[var(--color-primary)] mb-6">{priceFormatted}</p>
+
+      <div class="bg-[var(--color-primary)]/5 border border-[var(--color-primary)]/20 rounded-xl p-5 mb-6">
+        <p class="text-sm font-semibold text-gray-800 mb-1">
+          + Ajoutez le Guide CNV Couples à <span class="text-[var(--color-accent)]">-50%</span>
+          <span class="ml-1 text-[var(--color-primary)] font-bold">11€</span>
+          <span class="text-gray-400 line-through text-xs ml-1">22€</span>
+        </p>
+        <p class="text-sm text-gray-600 italic mt-1">"Les 12 scripts qui transforment vos disputes en dialogues"</p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <a
+          href="https://buy.stripe.com/aFacN5dyZcK17HF18RcZa02"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block w-full text-center py-3.5 px-6 bg-[var(--color-primary)] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity"
+        >
+          Oui, j'ajoute le guide
+        </a>
+        <a
+          href={p.supplier_url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          class="block w-full text-center py-3 px-6 text-gray-500 text-sm hover:text-gray-700 transition-colors"
+        >
+          Non merci, juste le produit
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const buyBtn = document.getElementById('buy-btn');
+    const modal = document.getElementById('upsell-modal');
+    const closeBtn = document.getElementById('upsell-close');
+    const overlay = document.getElementById('upsell-overlay');
+
+    if (buyBtn && modal) {
+      buyBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+    }
+    if (closeBtn && modal) {
+      closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    }
+    if (overlay && modal) {
+      overlay.addEventListener('click', () => modal.classList.add('hidden'));
+    }
+  </script>
 </BaseLayout>

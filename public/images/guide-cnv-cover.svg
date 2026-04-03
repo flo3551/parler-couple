@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 565" width="400" height="565">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5C3D7A"/>
+      <stop offset="100%" stop-color="#3D2657"/>
+    </linearGradient>
+    <clipPath id="rounded">
+      <rect x="0" y="0" width="400" height="565" rx="12"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="400" height="565" rx="12" fill="url(#bg)"/>
+
+  <!-- Clipped content -->
+  <g clip-path="url(#rounded)">
+    <!-- Couple circles decoration (upper-right) -->
+    <circle cx="320" cy="90" r="90" fill="#E07B5A" opacity="0.3"/>
+    <circle cx="370" cy="130" r="80" fill="#E07B5A" opacity="0.3"/>
+  </g>
+
+  <!-- White border frame -->
+  <rect x="10" y="10" width="380" height="545" rx="10" fill="none" stroke="white" stroke-width="1.5" opacity="0.25"/>
+
+  <!-- Title: Le Guide CNV -->
+  <text x="200" y="180" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle">Le Guide CNV</text>
+
+  <!-- Subtitle: pour Couples -->
+  <text x="200" y="230" font-family="Georgia, 'Times New Roman', serif" font-size="36" fill="white" text-anchor="middle">pour Couples</text>
+
+  <!-- Decorative separator line -->
+  <line x1="170" y1="260" x2="230" y2="260" stroke="#E07B5A" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Sub-subtitle line 1 -->
+  <text x="200" y="295" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="white" text-anchor="middle" opacity="0.9">12 Scripts pour Transformer</text>
+
+  <!-- Sub-subtitle line 2 -->
+  <text x="200" y="320" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="white" text-anchor="middle" opacity="0.9">vos Disputes en Dialogues</text>
+
+  <!-- Price badge circle -->
+  <circle cx="200" cy="430" r="42" fill="#E07B5A"/>
+
+  <!-- Price text -->
+  <text x="200" y="440" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">22€</text>
+
+  <!-- Domain at bottom -->
+  <text x="200" y="520" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#E07B5A" text-anchor="middle" opacity="0.9">parler-couple.fr</text>
+</svg>

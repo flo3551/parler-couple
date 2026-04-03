@@ -4,27 +4,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 import { site } from "../../../site.config.ts";
 
-const PER_PAGE = 10;
-
-const url = Astro.url;
-const pageParam = url.searchParams.get("page");
-const tagParam = url.searchParams.get("tag");
-const currentPage = pageParam ? Math.max(1, parseInt(pageParam, 10)) : 1;
-
 const allPosts = await getCollection("blog", ({ data }) => !data.draft);
 const sorted = allPosts.sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
 
 const allTags = [...new Set(sorted.flatMap((p) => p.data.tags ?? []))].sort();
-
-const filtered = tagParam
-  ? sorted.filter((p) => p.data.tags?.includes(tagParam))
-  : sorted;
-
-const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-const safePage = Math.min(currentPage, totalPages);
-const paginated = filtered.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE);
 
 const blogLabels: Record<string, Record<string, string>> = {
   title: { fr: "Blog", en: "Blog", de: "Blog", es: "Blog" },
@@ -36,28 +21,19 @@ const blogLabels: Record<string, Record<string, string>> = {
   },
   filter: { fr: "Filtrer par tag", en: "Filter by tag", de: "Nach Tag filtern", es: "Filtrar por etiqueta" },
   all: { fr: "Tous", en: "All", de: "Alle", es: "Todos" },
-  prev: { fr: "Précédent", en: "Previous", de: "Vorherige", es: "Anterior" },
-  next: { fr: "Suivant", en: "Next", de: "Nächste", es: "Siguiente" },
-  page: { fr: "Page", en: "Page", de: "Seite", es: "Página" },
   empty: { fr: "Aucun article trouvé.", en: "No articles found.", de: "Keine Artikel gefunden.", es: "No se encontraron artículos." },
 };
 
 const l = site.lang;
-const pageTitle = tagParam
-  ? `${tagParam} — ${blogLabels.title[l]}`
-  : blogLabels.title[l];
+const pageTitle = blogLabels.title[l];
 const pageDesc = blogLabels.desc[l];
-
-function buildPageUrl(p: number, tag?: string | null) {
-  const params = new URLSearchParams();
-  if (p > 1) params.set("page", String(p));
-  if (tag) params.set("tag", tag);
-  const qs = params.toString();
-  return `/blog${qs ? `?${qs}` : ""}`;
-}
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc}>
+  <style>
+    .page-hidden { display: none; }
+  </style>
+
   <div class="max-w-6xl mx-auto px-4 py-12">
     <header class="mb-10">
       <h1 class="text-3xl font-bold text-gray-900 mb-2">{pageTitle}</h1>
@@ -66,42 +42,34 @@ function buildPageUrl(p: number, tag?: string | null) {
 
     {allTags.length > 0 && (
       <nav aria-label={blogLabels.filter[l]} class="mb-8 flex flex-wrap gap-2">
-        <a
-          href="/blog"
-          class:list={[
-            "px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
-            !tagParam
-              ? "bg-[var(--color-primary)] text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200",
-          ]}
+        <button
+          type="button"
+          data-tag-btn=""
+          class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-[var(--color-primary)] text-white"
         >
           {blogLabels.all[l]}
-        </a>
+        </button>
         {allTags.map((tag) => (
-          <a
-            href={`/blog?tag=${encodeURIComponent(tag)}`}
-            class:list={[
-              "px-3 py-1.5 rounded-full text-sm font-medium transition-colors",
-              tagParam === tag
-                ? "bg-[var(--color-primary)] text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200",
-            ]}
+          <button
+            type="button"
+            data-tag-btn={tag}
+            class="px-3 py-1.5 rounded-full text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
           >
             {tag}
-          </a>
+          </button>
         ))}
       </nav>
     )}
 
-    {paginated.length === 0 ? (
+    {sorted.length === 0 ? (
       <p class="text-gray-500 py-12 text-center">{blogLabels.empty[l]}</p>
     ) : (
       <ul
         class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         role="list"
       >
-        {paginated.map((post) => (
-          <li>
+        {sorted.map((post) => (
+          <li data-tags={post.data.tags?.join(",") ?? ""}>
             <ArticleCard
               title={post.data.title}
               slug={post.slug}
@@ -116,31 +84,102 @@ function buildPageUrl(p: number, tag?: string | null) {
       </ul>
     )}
 
-    {totalPages > 1 && (
-      <nav
-        aria-label={`${blogLabels.page[l]} navigation`}
-        class="mt-12 flex items-center justify-center gap-2"
-      >
-        {safePage > 1 && (
-          <a
-            href={buildPageUrl(safePage - 1, tagParam)}
-            class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
-          >
-            ← {blogLabels.prev[l]}
-          </a>
-        )}
-        <span class="text-sm text-gray-500">
-          {blogLabels.page[l]} {safePage} / {totalPages}
-        </span>
-        {safePage < totalPages && (
-          <a
-            href={buildPageUrl(safePage + 1, tagParam)}
-            class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
-          >
-            {blogLabels.next[l]} →
-          </a>
-        )}
-      </nav>
-    )}
+    <nav id="pagination-nav" class="mt-12 flex items-center justify-center gap-2 hidden">
+      <button id="prev-page" type="button" onclick="changePage(-1)" class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors">← Précédent</button>
+      <span id="page-info" class="text-sm text-gray-500">Page 1 / 1</span>
+      <button id="next-page" type="button" onclick="changePage(1)" class="px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors">Suivant →</button>
+    </nav>
   </div>
 </BaseLayout>
+
+<script>
+  const PER_PAGE = 9;
+  let currentPage = 1;
+
+  function filterByTag() {
+    const params = new URLSearchParams(window.location.search);
+    const tag = params.get("tag");
+    const items = document.querySelectorAll("[data-tags]");
+    items.forEach(item => {
+      if (!tag) {
+        item.classList.remove("hidden");
+      } else {
+        const tags = item.getAttribute("data-tags")?.split(",") ?? [];
+        item.classList.toggle("hidden", !tags.includes(tag));
+      }
+    });
+    // Update active tag button
+    document.querySelectorAll("[data-tag-btn]").forEach(btn => {
+      const btnTag = btn.getAttribute("data-tag-btn");
+      btn.classList.toggle("bg-[var(--color-primary)]", btnTag === (tag ?? ""));
+      btn.classList.toggle("text-white", btnTag === (tag ?? ""));
+      btn.classList.toggle("bg-gray-100", btnTag !== (tag ?? ""));
+      btn.classList.toggle("text-gray-700", btnTag !== (tag ?? ""));
+    });
+  }
+
+  function paginate() {
+    const params = new URLSearchParams(window.location.search);
+    currentPage = parseInt(params.get("page") ?? "1", 10) || 1;
+
+    const visibleItems = Array.from(document.querySelectorAll("[data-tags]:not(.hidden)"));
+    const totalPages = Math.max(1, Math.ceil(visibleItems.length / PER_PAGE));
+
+    visibleItems.forEach((item, idx) => {
+      const page = Math.floor(idx / PER_PAGE) + 1;
+      item.classList.toggle("page-hidden", page !== currentPage);
+    });
+
+    // Update pagination nav
+    const paginationEl = document.getElementById("pagination-nav");
+    if (paginationEl && totalPages > 1) {
+      paginationEl.classList.remove("hidden");
+      const prevBtn = document.getElementById("prev-page");
+      const nextBtn = document.getElementById("next-page");
+      const pageInfo = document.getElementById("page-info");
+
+      if (prevBtn) prevBtn.classList.toggle("hidden", currentPage <= 1);
+      if (nextBtn) nextBtn.classList.toggle("hidden", currentPage >= totalPages);
+      if (pageInfo) pageInfo.textContent = `Page ${currentPage} / ${totalPages}`;
+    } else if (paginationEl) {
+      paginationEl.classList.add("hidden");
+    }
+  }
+
+  function changePage(delta: number) {
+    currentPage += delta;
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", String(currentPage));
+    history.pushState({}, "", url);
+    paginate();
+  }
+
+  // Make changePage available globally for onclick handlers
+  (window as any).changePage = changePage;
+
+  function update() {
+    filterByTag();
+    paginate();
+  }
+
+  update();
+  window.addEventListener("popstate", update);
+
+  document.querySelectorAll("[data-tag-btn]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const tag = btn.getAttribute("data-tag-btn");
+      const url = new URL(window.location.href);
+      if (tag) {
+        url.searchParams.set("tag", tag);
+      } else {
+        url.searchParams.delete("tag");
+      }
+      // Reset to page 1 when changing tag
+      url.searchParams.delete("page");
+      currentPage = 1;
+      history.pushState({}, "", url);
+      update();
+    });
+  });
+</script>

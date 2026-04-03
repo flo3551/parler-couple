@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#FFF5F0"/>
+  <!-- Storm cloud transforming to sunshine - conflict to resolution -->
+  <!-- Cloud (conflict) on left -->
+  <ellipse cx="220" cy="200" rx="80" ry="55" fill="#8B6FA8" opacity="0.7"/>
+  <ellipse cx="180" cy="210" rx="55" ry="45" fill="#8B6FA8" opacity="0.7"/>
+  <ellipse cx="260" cy="215" rx="55" ry="40" fill="#8B6FA8" opacity="0.7"/>
+  <!-- Lightning bolt -->
+  <path d="M215 165 L195 205 L215 205 L205 245" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <!-- Arrow -->
+  <path d="M325 210 L475 210" stroke="#5C3D7A" stroke-width="3" stroke-dasharray="6,4"/>
+  <polygon points="470,204 482,210 470,216" fill="#5C3D7A"/>
+  <!-- Sun (resolution) on right -->
+  <circle cx="580" cy="205" r="55" fill="#E07B5A" opacity="0.85"/>
+  <circle cx="580" cy="205" r="40" fill="#F5A875" opacity="0.9"/>
+  <!-- Sun rays -->
+  <line x1="580" y1="135" x2="580" y2="120" stroke="#E07B5A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="632" y1="153" x2="643" y2="142" stroke="#E07B5A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="650" y1="205" x2="665" y2="205" stroke="#E07B5A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="632" y1="257" x2="643" y2="268" stroke="#E07B5A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="528" y1="153" x2="517" y2="142" stroke="#E07B5A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="510" y1="205" x2="495" y2="205" stroke="#E07B5A" stroke-width="3" stroke-linecap="round"/>
+  <text x="400" y="380" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#5C3D7A" opacity="0.7">Parler en Couple</text>
+</svg>

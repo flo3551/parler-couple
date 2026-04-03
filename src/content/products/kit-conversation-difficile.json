@@ -18,7 +18,7 @@
     "coffret couple original",
     "kit mieux communiquer couple"
   ],
-  "images": [],
+  "images": ["/images/kit-conversation-difficile.svg"],
   "in_stock": true,
   "copy_hook": "Pour les conversations qu'on reporte depuis trop longtemps.",
   "internal_links": ["/shop", "/guide-communication-couple-pdf"]

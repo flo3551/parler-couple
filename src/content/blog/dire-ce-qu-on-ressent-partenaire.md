@@ -14,9 +14,10 @@ word_count: 2050
 pubDate: 2026-04-03
 draft: false
 tags: ["emotions", "expression", "communication"]
+image: "/images/methode-cnv-couple.svg"
 ---
 
-Tu sais exactement ce que tu ressens. La frustration, la tristesse, la solitude — c'est là, net, présent. Mais dès que tu ouvres la bouche pour en parler, quelque chose déraille. L'autre devient défensif. La conversation tourne à l'accusation. Ou tu gardes tout pour toi, encore une fois, parce que tu ne trouves pas les mots qui ne blesseraient pas.
+Tu sais exactement ce que tu ressens. La frustration, la tristesse, la solitude - c'est là, net, présent. Mais dès que tu ouvres la bouche pour en parler, quelque chose déraille. L'autre devient défensif. La conversation tourne à l'accusation. Ou tu gardes tout pour toi, encore une fois, parce que tu ne trouves pas les mots qui ne blesseraient pas.
 
 Ce n'est pas un problème d'intention. C'est un problème de formulation.
 
@@ -24,15 +25,15 @@ Ce n'est pas un problème d'intention. C'est un problème de formulation.
 
 La différence entre une conversation qui s'ouvre et une conversation qui se ferme tient souvent à deux lettres : "tu" ou "je".
 
-Le "tu" accusateur pointe vers l'autre. Il le désigne responsable de ce qu'on ressent. Et même quand ce n'est pas l'intention, l'autre l'entend comme une attaque — et il se défend. C'est automatique, c'est humain.
+Le "tu" accusateur pointe vers l'autre. Il le désigne responsable de ce qu'on ressent. Et même quand ce n'est pas l'intention, l'autre l'entend comme une attaque - et il se défend. C'est automatique, c'est humain.
 
-"Tu ne m'écoutes jamais." "Tu es toujours sur ton téléphone." "Tu ne penses qu'à toi." Chacune de ces phrases contient un verdict. L'autre est jugé, condamné — et il n'a plus qu'une seule option : se justifier ou contre-attaquer.
+"Tu ne m'écoutes jamais." "Tu es toujours sur ton téléphone." "Tu ne penses qu'à toi." Chacune de ces phrases contient un verdict. L'autre est jugé, condamné - et il n'a plus qu'une seule option : se justifier ou contre-attaquer.
 
 Le "je", lui, décrit ce qui se passe en toi. Il n'accuse personne. Il partage un vécu. Et cela ouvre un espace différent dans la conversation.
 
 "Je me sens seul quand on est dans la même pièce et qu'on ne se parle pas." Ce n'est pas la même chose que "tu ne me parles jamais". La première formule décrit ton expérience. La seconde attaque.
 
-Mais attention : le "je" peut aussi être un "tu" déguisé. "Je me sens agressé quand TU t'énerves comme ça." Ici, le "je" n'est qu'un emballage — l'accusation est toujours là. Un vrai "je" ne nomme pas le comportement de l'autre. Il ne décrit que ce que toi tu ressens.
+Mais attention : le "je" peut aussi être un "tu" déguisé. "Je me sens agressé quand TU t'énerves comme ça." Ici, le "je" n'est qu'un emballage - l'accusation est toujours là. Un vrai "je" ne nomme pas le comportement de l'autre. Il ne décrit que ce que toi tu ressens.
 
 ## Les émotions difficiles à nommer
 
@@ -54,7 +55,7 @@ Quelques émotions qu'on nomme rarement mais qui sont fréquentes dans les coupl
 
 **La peur de perdre l'autre** : qui se cache souvent derrière les jalousies, les reproches répétés, les comportements de contrôle.
 
-Identifier laquelle de ces émotions est présente avant une conversation difficile permet de l'aborder avec beaucoup plus de précision — et donc de chances d'être vraiment entendu.
+Identifier laquelle de ces émotions est présente avant une conversation difficile permet de l'aborder avec beaucoup plus de précision - et donc de chances d'être vraiment entendu.
 
 ## Tableau comparatif : avant/après reformulation CNV
 
@@ -92,7 +93,7 @@ Après : "Je réalise que j'ai rarement de signes de reconnaissance pour ce que 
 
 ---
 
-La structure sous-jacente est toujours la même : observation neutre + émotion ressentie + besoin non satisfait + demande concrète. C'est le modèle CNV (Observation, Sentiment, Besoin, Demande). Il peut sembler mécanique au début — avec la pratique, il devient naturel.
+La structure sous-jacente est toujours la même : observation neutre + émotion ressentie + besoin non satisfait + demande concrète. C'est le modèle CNV (Observation, Sentiment, Besoin, Demande). Il peut sembler mécanique au début - avec la pratique, il devient naturel.
 
 ## L'exercice du check-in émotionnel
 
@@ -100,9 +101,9 @@ S'exprimer sans blesser en couple ne se pratique pas uniquement dans les moments
 
 Le check-in émotionnel est une pratique simple que certains couples font en rituel : une fois par jour, ou quelques fois par semaine, chacun répond à la même question.
 
-**"Sur une échelle de 1 à 10, comment tu te sens en ce moment — et c'est quoi l'émotion principale qui est là pour toi ?"**
+**"Sur une échelle de 1 à 10, comment tu te sens en ce moment - et c'est quoi l'émotion principale qui est là pour toi ?"**
 
-Ce n'est pas une thérapie. Ce n'est pas une conversation de fond. C'est juste un point de contact. L'idée est de créer l'habitude de nommer ce qu'on ressent, à voix haute, régulièrement — pas seulement quand ça explose.
+Ce n'est pas une thérapie. Ce n'est pas une conversation de fond. C'est juste un point de contact. L'idée est de créer l'habitude de nommer ce qu'on ressent, à voix haute, régulièrement - pas seulement quand ça explose.
 
 Pour que cet exercice fonctionne, quelques règles simples :
 
@@ -116,30 +117,30 @@ Le [guide avec phrases pour s'exprimer sans blesser](/guide-communication-couple
 
 ## Quand les mots ne viennent pas
 
-Il arrive qu'on sache qu'on ressent quelque chose sans trouver le mot juste. Ou qu'on soit tellement submergé émotionnellement qu'on ne peut pas parler — la gorge serrée, les larmes proches, ou au contraire une espèce de vide.
+Il arrive qu'on sache qu'on ressent quelque chose sans trouver le mot juste. Ou qu'on soit tellement submergé émotionnellement qu'on ne peut pas parler - la gorge serrée, les larmes proches, ou au contraire une espèce de vide.
 
 Dans ces moments, ne pas parler peut être la bonne décision à court terme. Mais il faut le dire : "Je sens qu'il y a quelque chose mais je ne suis pas capable d'en parler maintenant. Est-ce qu'on peut se retrouver ce soir pour en parler ?"
 
-Cette phrase fait deux choses : elle signale à l'autre qu'il y a quelque chose — il ne reste pas dans l'incertitude — et elle te donne le temps de trouver tes mots. C'est très différent du silence total, qui laisse l'autre interpréter à sa façon.
+Cette phrase fait deux choses : elle signale à l'autre qu'il y a quelque chose - il ne reste pas dans l'incertitude - et elle te donne le temps de trouver tes mots. C'est très différent du silence total, qui laisse l'autre interpréter à sa façon.
 
-Certaines personnes fonctionnent mieux à l'écrit dans ces moments-là. Écrire ce qu'on ressent avant de le dire — dans un message, dans un journal, dans une lettre — permet de clarifier ce qui était confus. Le [journal de couple pour mettre les mots sur les émotions](/shop/journal-couple) peut remplir exactement ce rôle.
+Certaines personnes fonctionnent mieux à l'écrit dans ces moments-là. Écrire ce qu'on ressent avant de le dire - dans un message, dans un journal, dans une lettre - permet de clarifier ce qui était confus. Le [journal de couple pour mettre les mots sur les émotions](/shop/journal-couple) peut remplir exactement ce rôle.
 
 ## Ce que l'autre ressent quand on s'exprime vraiment
 
 Il y a une chose qu'on oublie souvent quand on travaille sur sa façon de s'exprimer : l'autre aussi veut se sentir proche.
 
-Quand tu exprimes ce que tu ressens vraiment — pas avec des reproches, pas avec des accusations, mais avec honnêteté et vulnérabilité — quelque chose s'ouvre chez l'autre. La plupart des partenaires ne veulent pas que tu souffres en silence. Ils ne savent juste pas que c'est le cas.
+Quand tu exprimes ce que tu ressens vraiment - pas avec des reproches, pas avec des accusations, mais avec honnêteté et vulnérabilité - quelque chose s'ouvre chez l'autre. La plupart des partenaires ne veulent pas que tu souffres en silence. Ils ne savent juste pas que c'est le cas.
 
-Paradoxalement, montrer sa vulnérabilité crée plus de sécurité dans le couple que de tout garder sous contrôle. Ça demande du courage, parce que ça expose — mais ça crée aussi une intimité réelle.
+Paradoxalement, montrer sa vulnérabilité crée plus de sécurité dans le couple que de tout garder sous contrôle. Ça demande du courage, parce que ça expose - mais ça crée aussi une intimité réelle.
 
-C'est exactement ce que la Communication Non Violente appelle le "langage de la vie" : parler depuis ce qui est vivant en soi, depuis les besoins réels, depuis l'émotion authentique — plutôt que depuis la stratégie de se protéger.
+C'est exactement ce que la Communication Non Violente appelle le "langage de la vie" : parler depuis ce qui est vivant en soi, depuis les besoins réels, depuis l'émotion authentique - plutôt que depuis la stratégie de se protéger.
 
 Pour aller plus loin dans la compréhension des [exercices pour mieux s'exprimer en couple](/exercices-cnv-couple), il existe des exercices guidés à pratiquer à deux, progressivement, à son rythme.
 
-Et si tu reconnais dans cet article le poids de tout ce que tu n'as pas dit jusqu'à maintenant, l'article sur [pourquoi on accumule les non-dits](/les-non-dits-en-couple) te donnera les clés pour comprendre le mécanisme — et comment commencer à le dénouer.
+Et si tu reconnais dans cet article le poids de tout ce que tu n'as pas dit jusqu'à maintenant, l'article sur [pourquoi on accumule les non-dits](/les-non-dits-en-couple) te donnera les clés pour comprendre le mécanisme - et comment commencer à le dénouer.
 
 Apprendre à dire ce qu'on ressent, c'est un travail. Mais c'est aussi, à terme, l'une des formes les plus concrètes qu'on puisse donner à l'amour.
 
 ---
 
-**À lire aussi :** Tout sur les [non-dits dans la relation de couple](/non-dits-couple) — leur origine, leur coût, et comment les dénouer progressivement.
+**À lire aussi :** Tout sur les [non-dits dans la relation de couple](/non-dits-couple) - leur origine, leur coût, et comment les dénouer progressivement.

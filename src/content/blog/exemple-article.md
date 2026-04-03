@@ -1,5 +1,5 @@
 ---
-title: "Article d'exemple — Remplacez ce titre"
+title: "Article d'exemple - Remplacez ce titre"
 metaDescription: "Description méta de cet article pour les moteurs de recherche. Remplacez ce texte par votre vrai meta description."
 kw_primary: "exemple niche"
 kw_secondary: ["conseil", "guide", "tutoriel"]

@@ -6,7 +6,7 @@ if (!site.monetization.pdf) {
   return Astro.redirect("/", 302);
 }
 
-const downloadUrl = import.meta.env.PDF_DOWNLOAD_URL ?? "#";
+const downloadUrl = "/guide-cnv-couples.pdf";
 const l = site.lang;
 
 const labels: Record<string, Record<string, string>> = {

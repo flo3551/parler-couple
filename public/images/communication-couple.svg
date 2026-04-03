@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#FFF8F5"/>
+  <!-- Two figures facing each other -->
+  <circle cx="280" cy="160" r="40" fill="#5C3D7A" opacity="0.85"/>
+  <rect x="245" y="210" width="70" height="90" rx="20" fill="#5C3D7A" opacity="0.85"/>
+  <circle cx="520" cy="160" r="40" fill="#E07B5A" opacity="0.85"/>
+  <rect x="485" y="210" width="70" height="90" rx="20" fill="#E07B5A" opacity="0.85"/>
+  <!-- Heart in the middle -->
+  <path d="M400 230 C400 215, 380 200, 370 215 C360 230, 370 250, 400 270 C430 250, 440 230, 430 215 C420 200, 400 215, 400 230Z" fill="#E07B5A" opacity="0.7"/>
+  <!-- Bottom label -->
+  <text x="400" y="380" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#5C3D7A" opacity="0.7">Parler en Couple</text>
+</svg>

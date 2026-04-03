@@ -10,6 +10,9 @@ if (!site.monetization.pdf) {
 
 let pdfData: {
   title: string;
+  subtitle?: string;
+  promise?: string;
+  cover_image?: string;
   price: number;
   original_price?: number;
   pain_point: string;
@@ -91,9 +94,18 @@ const faqSchema = pdfData.faq?.length > 0
 
   <div class="max-w-3xl mx-auto px-4 py-12 space-y-14">
     <header class="text-center space-y-5">
+      {pdfData.cover_image && (
+        <img src={pdfData.cover_image} alt={pdfData.title} class="mx-auto max-w-xs rounded-2xl shadow-xl" />
+      )}
       <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight">
         {pdfData.title}
       </h1>
+      {pdfData.subtitle && <p class="text-xl text-gray-600 font-medium">{pdfData.subtitle}</p>}
+      {pdfData.promise && (
+        <p class="text-base text-[var(--color-primary)] font-semibold bg-purple-50 border border-purple-100 rounded-xl px-6 py-3 inline-block">
+          ✓ {pdfData.promise}
+        </p>
+      )}
       <PriceTag price={pdfData.price} originalPrice={pdfData.original_price} size="lg" />
       <a
         href={pdfData.stripe_url}

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <!-- Background -->
+  <rect width="800" height="800" fill="#FFF5F0"/>
+
+  <!-- Box shadow -->
+  <rect x="188" y="308" width="428" height="288" rx="16" fill="#c8613a" opacity="0.2"/>
+
+  <!-- Box body (main) -->
+  <rect x="180" y="290" width="428" height="282" rx="14" fill="#5C3D7A"/>
+
+  <!-- Box lid -->
+  <rect x="168" y="240" width="452" height="64" rx="12" fill="#4a2e63"/>
+
+  <!-- Lid highlight -->
+  <rect x="168" y="240" width="452" height="64" rx="12" fill="url(#lidGrad)" opacity="0.2"/>
+  <defs>
+    <linearGradient id="lidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ribbon vertical -->
+  <rect x="380" y="240" width="28" height="290" fill="#E07B5A" opacity="0.9"/>
+
+  <!-- Ribbon horizontal (on lid) -->
+  <rect x="168" y="258" width="452" height="28" fill="#E07B5A" opacity="0.9"/>
+
+  <!-- Ribbon bow top circle left -->
+  <ellipse cx="358" cy="220" rx="42" ry="28" fill="#E07B5A" transform="rotate(-20 358 220)"/>
+  <!-- Ribbon bow top circle right -->
+  <ellipse cx="432" cy="220" rx="42" ry="28" fill="#E07B5A" transform="rotate(20 432 220)"/>
+  <!-- Bow center knot -->
+  <ellipse cx="394" cy="228" rx="18" ry="14" fill="#c8613a"/>
+
+  <!-- Box face: subtle texture lines -->
+  <line x1="200" y1="340" x2="588" y2="340" stroke="white" stroke-width="1" opacity="0.12"/>
+  <line x1="200" y1="390" x2="588" y2="390" stroke="white" stroke-width="1" opacity="0.12"/>
+  <line x1="200" y1="440" x2="588" y2="440" stroke="white" stroke-width="1" opacity="0.12"/>
+  <line x1="200" y1="490" x2="588" y2="490" stroke="white" stroke-width="1" opacity="0.12"/>
+
+  <!-- Stars scattered -->
+  <!-- Star 1 top-left -->
+  <g transform="translate(120, 160)">
+    <polygon points="0,-18 5,-6 18,-6 8,3 11,16 0,9 -11,16 -8,3 -18,-6 -5,-6" fill="#5C3D7A" opacity="0.55"/>
+  </g>
+  <!-- Star 2 top-right -->
+  <g transform="translate(660, 140)">
+    <polygon points="0,-22 6,-7 22,-7 10,3 13,19 0,11 -13,19 -10,3 -22,-7 -6,-7" fill="#E07B5A" opacity="0.55"/>
+  </g>
+  <!-- Star 3 small mid-left -->
+  <g transform="translate(90, 400)">
+    <polygon points="0,-12 3.5,-4 12,-4 5,2 7.5,11 0,6.5 -7.5,11 -5,2 -12,-4 -3.5,-4" fill="#5C3D7A" opacity="0.4"/>
+  </g>
+  <!-- Star 4 small mid-right -->
+  <g transform="translate(700, 380)">
+    <polygon points="0,-12 3.5,-4 12,-4 5,2 7.5,11 0,6.5 -7.5,11 -5,2 -12,-4 -3.5,-4" fill="#E07B5A" opacity="0.4"/>
+  </g>
+  <!-- Star 5 small bottom-right -->
+  <g transform="translate(660, 620)">
+    <polygon points="0,-10 3,-3 10,-3 4,2 6,9 0,5.5 -6,9 -4,2 -10,-3 -3,-3" fill="#5C3D7A" opacity="0.35"/>
+  </g>
+
+  <!-- "KIT CONVERSATION" text -->
+  <text x="400" y="640" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#5C3D7A" text-anchor="middle" letter-spacing="3">KIT CONVERSATION</text>
+
+  <!-- Divider -->
+  <line x1="160" y1="665" x2="640" y2="665" stroke="#E07B5A" stroke-width="2" opacity="0.5"/>
+
+  <!-- "DIFFICILE" subtitle -->
+  <text x="400" y="710" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#E07B5A" text-anchor="middle" letter-spacing="8">DIFFICILE</text>
+
+  <!-- Small elements: dots -->
+  <circle cx="400" cy="752" r="5" fill="#5C3D7A" opacity="0.3"/>
+  <circle cx="424" cy="752" r="5" fill="#E07B5A" opacity="0.4"/>
+  <circle cx="376" cy="752" r="5" fill="#5C3D7A" opacity="0.3"/>
+
+  <!-- Subtle border frame -->
+  <rect x="18" y="18" width="764" height="764" rx="20" fill="none" stroke="#5C3D7A" stroke-width="2" opacity="0.12"/>
+</svg>

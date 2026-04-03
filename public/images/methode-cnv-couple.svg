@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#F5F0FA"/>
+  <rect x="0" y="0" width="800" height="450" fill="url(#grad1)"/>
+  <defs>
+    <linearGradient id="grad1" x1="0" y1="0" x2="800" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5C3D7A" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#E07B5A" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <!-- Speech bubbles -->
+  <ellipse cx="280" cy="200" rx="120" ry="80" fill="#5C3D7A" opacity="0.9"/>
+  <polygon points="250,275 270,295 300,275" fill="#5C3D7A" opacity="0.9"/>
+  <ellipse cx="520" cy="200" rx="120" ry="80" fill="#E07B5A" opacity="0.9"/>
+  <polygon points="500,275 530,295 550,275" fill="#E07B5A" opacity="0.9"/>
+  <!-- Text in bubbles -->
+  <text x="280" y="195" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">CNV</text>
+  <text x="280" y="220" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="white" opacity="0.9">Méthode</text>
+  <text x="520" y="195" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="white">OSBD</text>
+  <text x="520" y="220" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="white" opacity="0.9">4 étapes</text>
+  <!-- Connection line -->
+  <line x1="405" y1="200" x2="395" y2="200" stroke="#5C3D7A" stroke-width="2" stroke-dasharray="4,3" opacity="0.4"/>
+  <!-- Bottom label -->
+  <text x="400" y="380" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="600" fill="#5C3D7A" opacity="0.7">Parler en Couple</text>
+</svg>

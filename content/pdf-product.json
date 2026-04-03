@@ -2,14 +2,58 @@
   "title": "Le Guide CNV pour Couples",
   "subtitle": "12 Scripts pour Transformer vos Disputes en Dialogues",
   "price": 22,
+  "original_price": 37,
   "currency": "EUR",
-  "description": "28 pages de scripts concrets, de méthodes CNV appliquées et d'exercices à faire chez soi. Pour les couples qui veulent se parler vraiment.",
+  "stripe_price_id": "price_1TI6IyH1ndsY9QKnrH7kUozf",
+  "stripe_url": "https://buy.stripe.com/aFacN5dyZcK17HF18RcZa02",
+  "cover_image": "/images/guide-cnv-cover.svg",
+  "pain_point": "Vous avez les mêmes disputes en boucle. Vous vous dites des choses que vous regrettez. Vous évitez les sujets qui fâchent jusqu'à ce que ça explose. Vous avez essayé de parler calmement — ça dégénère quand même.",
+  "solution": "Ce guide vous donne les mots exacts à utiliser dans les 12 situations qui reviennent le plus dans votre couple. Pas de théorie, pas de jargon. Des dialogues complets, prêts à utiliser ce soir.",
+  "promise": "En moins d'une semaine, vous saurez aborder les sujets qui fâchent sans que ça dégénère.",
   "features": [
-    "12 scripts de conversations difficiles prêts à utiliser",
-    "Méthode CNV expliquée simplement (sans jargon)",
-    "Protocole 'conversation réparatrice' après une dispute",
-    "3 rituels de communication à ancrer cette semaine",
-    "Checklist 7 jours + journal de suivi"
+    "12 scripts complets avec dialogue AVANT (la version blessante) et APRÈS (la version CNV) — vous voyez exactement quoi dire",
+    "Méthode OSBD expliquée en langage clair : Observation, Sentiment, Besoin, Demande",
+    "Le protocole 'conversation réparatrice' : comment revenir sur une dispute sans rouvrir les blessures",
+    "3 rituels de communication à ancrer cette semaine (10 minutes par jour suffit)",
+    "Checklist 7 jours + journal de suivi pour ancrer les nouvelles habitudes",
+    "Lexique CNV simplifié : les 10 termes clés que vous utiliserez vraiment"
   ],
-  "stripe_price_id": "price_1TI6IyH1ndsY9QKnrH7kUozf"
+  "testimonials": [
+    {
+      "author": "Marie, 34 ans",
+      "text": "On avait la même dispute sur la belle-famille depuis 3 ans. J'ai utilisé le script 3 mot pour mot. Pour la première fois, on en a parlé sans se blesser."
+    },
+    {
+      "author": "Thomas, 41 ans",
+      "text": "Je suis sceptique de nature. Mais le script sur la distance physique (script 4) a ouvert une conversation qu'on n'avait pas eu depuis 2 ans."
+    },
+    {
+      "author": "Lucie, 29 ans",
+      "text": "Le format avant/après est brillant. Voir la différence entre ce qu'on dit normalement et la version CNV m'a tout de suite convaincu."
+    }
+  ],
+  "faq": [
+    {
+      "q": "Est-ce que mon partenaire doit aussi lire le guide ?",
+      "a": "Non. Les scripts sont conçus pour fonctionner même si vous êtes le seul à les utiliser. Quand vous changez votre façon de parler, la dynamique change naturellement."
+    },
+    {
+      "q": "Est-ce que ça marche pour des couples en crise sérieuse ?",
+      "a": "Ce guide est conçu pour des couples fonctionnels qui veulent mieux communiquer. Si vous traversez une crise profonde, il peut aider comme premier pas, mais nous recommandons aussi un accompagnement professionnel."
+    },
+    {
+      "q": "Est-ce que c'est du contenu théorique ou pratique ?",
+      "a": "100% pratique. Chaque concept est immédiatement suivi d'un exemple concret. Le guide fait 28 pages et contient plus de scripts que de théorie."
+    },
+    {
+      "q": "Et si ça ne me convient pas ?",
+      "a": "Remboursement intégral dans les 30 jours, sans question. Envoyez un email et on s'en occupe dans les 24h."
+    }
+  ],
+  "trust_signals": [
+    { "icon": "lock", "text": "Paiement 100% sécurisé via Stripe" },
+    { "icon": "download", "text": "Accès immédiat après paiement" },
+    { "icon": "refresh", "text": "Remboursement garanti 30 jours" },
+    { "icon": "star", "text": "28 pages de contenu actionnable" }
+  ]
 }

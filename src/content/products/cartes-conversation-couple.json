@@ -18,7 +18,7 @@
     "questions couple profondeur",
     "jeu soirée couple"
   ],
-  "images": [],
+  "images": ["/images/cartes-conversation-couple.svg"],
   "in_stock": true,
   "copy_hook": "Une soirée, un paquet de cartes, et des conversations dont vous vous souviendrez.",
   "internal_links": ["/shop", "/guide-communication-couple-pdf"]

@@ -14,7 +14,7 @@ const labels: Record<string, Record<string, string>> = {
   shop:    { fr: "Boutique",en: "Shop",  de: "Shop",     es: "Tienda" },
   contact: { fr: "Contact", en: "Contact",de: "Kontakt", es: "Contacto" },
   pdf:     { fr: "Guide PDF",en: "PDF Guide",de: "PDF Guide",es: "Guía PDF" },
-  lead:    { fr: "Devis",   en: "Quote", de: "Angebot",  es: "Presupuesto" },
+  lead:    { fr: "Exercices gratuits", en: "Free exercises", de: "Kostenlose Übungen", es: "Ejercicios gratis" },
 };
 
 const l = site.lang;
@@ -31,7 +31,7 @@ if (monetization.pdf) {
   baseLinks.push({ href: "/pdf", label: labels.pdf });
 }
 if (monetization.leadGen) {
-  baseLinks.push({ href: "/contact", label: labels.lead });
+  baseLinks.push({ href: "/download", label: labels.lead });
 }
 
 const ctaLabel: Record<string, string> = {

@@ -18,7 +18,7 @@
     "cadeau couple original",
     "mieux se connaître couple"
   ],
-  "images": [],
+  "images": ["/images/journal-couple.svg"],
   "in_stock": true,
   "copy_hook": "Le journal qui pose les questions qu'on n'ose pas poser.",
   "internal_links": ["/shop", "/guide-communication-couple-pdf"]
